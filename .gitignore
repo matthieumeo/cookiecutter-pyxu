@@ -70,6 +70,9 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+docs/source/api/
+docs/source/release/
+docs/build/
 
 # PyBuilder
 target/
@@ -127,3 +130,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+# Pycharm files
+.idea
+
+# OS stuff
+.DS_store
+
+# Benchmarking results
+.asv/
+
+# VSCode
+.vscode/
+pycsou-foobar/
