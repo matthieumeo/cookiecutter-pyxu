@@ -7,7 +7,10 @@ except ImportError:
 __version__ = "0.0.1"
 {% endif -%}
 
-{% if cookiecutter.include_math_plugin == 'y' %}
+
+{% if cookiecutter.include_data_plugin == 'y' %}
+from ._data import SheppLogan
+{% endif %}{% if cookiecutter.include_math_plugin == 'y' %}
 from ._math import eigh
 {% endif %}{% if cookiecutter.include_operator_plugin == 'y' %}
 from ._operator import Flip, NullFunc
@@ -17,7 +20,9 @@ from ._solver import GradientDescent
 from ._stop import Deadline
 {% endif %}
 __all__ = (
-    {% if cookiecutter.include_math_plugin == 'y' -%}
+    { % if cookiecutter.include_data_plugin == 'y' -%}
+    "SheppLogan",
+    {% endif %}{% if cookiecutter.include_math_plugin == 'y' -%}
     "eigh",
     {% endif %}{% if cookiecutter.include_operator_plugin == 'y' -%}
     "Flip",
