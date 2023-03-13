@@ -8,23 +8,23 @@ __version__ = "0.0.1"
 {% endif -%}
 
 {% if cookiecutter.include_math_plugin == 'y' %}
-from ._math import my_math_func
+from ._math import eigh
 {% endif %}{% if cookiecutter.include_operator_plugin == 'y' %}
-from ._operator import MyLinOp, NullFunc
+from ._operator import Flip, NullFunc
 {% endif %}{% if cookiecutter.include_solver_plugin == 'y' -%}
-from ._solver import MySolver
+from ._solver import GradientDescent
 {% endif %}{% if cookiecutter.include_stop_plugin == 'y' -%}
-from ._stop import MyStopCriterion
+from ._stop import Deadline
 {% endif %}
 __all__ = (
     {% if cookiecutter.include_math_plugin == 'y' -%}
-    "my_math_func",
+    "eigh",
     {% endif %}{% if cookiecutter.include_operator_plugin == 'y' -%}
-    "MyLinOp",
+    "Flip",
     "NullFunc",
     {% endif %}{% if cookiecutter.include_solver_plugin == 'y' -%}
-    "MySolver",
+    "GradientDescent",
     {% endif %}{% if cookiecutter.include_stop_plugin == 'y' -%}
-    "MyStopCriterion",
+    "Deadline",
 {% endif -%}
 )

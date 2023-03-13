@@ -1,19 +1,22 @@
 import collections.abc as cabc
-import types
 
 import numpy as np
 
 import pycsou.abc.operator as pyco
 import pycsou.runtime as pycrt
+import pycsou.util as pycu
 import pycsou.util.ptype as pyct
+import pycsou.operator.linop as pycl
 
+__all__ = ["Flip", "NullFunc"]
 
-__all__ = ["MyLinOp", "NullFunc"]
+class Flip(pyco.LinOp):
 
-class MyLinOp(pyco.LinOp):
     def __init__(self, arg_shape: pyct.NDArrayShape, axis: pyct.NDArrayAxis = None) -> pyct.OpT:
         r"""
-        Flip axis
+        Reverse the order of elements in an array along the given axis.
+
+        The shape of the array is preserved, but the elements are reordered.
 
         Parameters
         ----------
@@ -32,10 +35,10 @@ class MyLinOp(pyco.LinOp):
                 obj = [obj]
             return np.array(obj, dtype=int)
 
-        arg_shape = as_array(arg_shape)
-        assert np.all(arg_shape > 0)
-        dim = np.prod(arg_shape).item()
-        N_dim = len(arg_shape)
+        self.arg_shape = as_array(arg_shape)
+        assert np.all(self.arg_shape > 0)
+        dim = np.prod(self.arg_shape).item()
+        N_dim = len(self.arg_shape)
 
         if axis is None:
             axis = np.arange(N_dim)
@@ -48,11 +51,11 @@ class MyLinOp(pyco.LinOp):
     @pycrt.enforce_precision(i="arr")
     def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
         sh = arr.shape[:-1]
-        arr = arr.reshape(*sh, *self._arg_shape)
-        out = arr.copy(deep=True)
-
+        arr = arr.reshape(*sh, *self.arg_shape)
+        out = arr.copy()
+        xp = pycu.get_array_module(arr)
         for ax in self.axis:
-            out = np.flip(out, axis=ax)
+            out = xp.flip(out, axis=len(sh) + ax)
 
         out = out.reshape(*sh, self.codim)
         return out
@@ -62,5 +65,16 @@ class MyLinOp(pyco.LinOp):
         return self.apply(arr)
 
 
-def NullFunc():
-    print("This just prints")
+def NullFunc(dim: pyct.Integer) -> pyct.OpT:
+    """
+    Null functional (modified from base Pycsou class).
+    This functional maps any input vector on the null scalar.
+
+    The plugin modification adds a print at init time.
+    """
+    op = pycl.NullFunc(dim)
+    op._name = "ModifiedNullFunc"
+    print("The modified NullFunc exemplifies how to overload a base class. ",
+          "To overload a Pycsou base class, an underscore needs to be added in front of the class name, "
+          "in the setup.cfg file section [options.entry_points]).")
+    return op

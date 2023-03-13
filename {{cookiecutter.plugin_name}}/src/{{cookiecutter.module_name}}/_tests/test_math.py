@@ -1,6 +1,17 @@
-from {{cookiecutter.module_name}} import my_math_func
+import numpy as np
+
+from {{cookiecutter.module_name}} import eigh
 
 
 # tmp_path is a pytest fixture
 def test_math():
-    assert True
+    rng = np.random.default_rng(seed=0)
+    arg_shape = (5, 5)
+    batch_shape = (3, 2)
+    input_shape = batch_shape + arg_shape
+    x = rng.normal(size=input_shape)
+    x += x.swapaxes(2,3)
+    w, v = eigh(x.reshape(*batch_shape, -1)).reshape(*input_shape)
+    w_np, v_np = np.linalg.eigh(x)
+    assert np.allclose(v, v_np)
+    assert np.allclose(w, w_np)
