@@ -6,9 +6,8 @@ import pycsou.abc.operator as pyco
 import pycsou.runtime as pycrt
 import pycsou.util as pycu
 import pycsou.util.ptype as pyct
-import pycsou.operator.linop as pycl
 
-__all__ = ["Flip", "NullFunc"]
+__all__ = ["Flip"]
 
 class Flip(pyco.LinOp):
 
@@ -63,18 +62,3 @@ class Flip(pyco.LinOp):
     @pycrt.enforce_precision(i="arr")
     def adjoint(self, arr: pyct.NDArray) -> pyct.NDArray:
         return self.apply(arr)
-
-
-def NullFunc(dim: pyct.Integer) -> pyct.OpT:
-    """
-    Null functional (modified from base Pycsou class).
-    This functional maps any input vector on the null scalar.
-
-    The plugin modification adds a print at init time.
-    """
-    op = pycl.NullFunc(dim)
-    op._name = "ModifiedNullFunc"
-    print("The modified NullFunc exemplifies how to overload a base class. ",
-          "To overload a Pycsou base class, an underscore needs to be added in front of the class name, "
-          "in the setup.cfg file section [options.entry_points]).")
-    return op
