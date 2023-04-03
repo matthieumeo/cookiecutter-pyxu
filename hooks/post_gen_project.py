@@ -14,8 +14,8 @@ ALL_TEMP_FOLDERS = ["licenses"]
 
 
 
-def remove_file(filepath):
-    os.remove(os.path.join(PROJECT_DIRECTORY, filepath))
+def remove_files(filepath):
+    shutil.rmtree(os.path.join(PROJECT_DIRECTORY, filepath), ignore_errors=True)
 
 
 def remove_temp_folders(temp_folders):
@@ -29,8 +29,21 @@ def remove_unrequested_plugin_examples():
     {% for key, value in cookiecutter.items() %}
     {% if key.startswith('include_') and key.endswith("_plugin") and value != 'y' %}
     name = "{{ key }}".replace("include_", "").replace("_plugin", "")
-    remove_file(f"src/{module}/{name}.py")
-    remove_file(f"src/{module}_tests/test_{name}.py")
+    if name in ["data", "io", "pipeline"]:
+        remove_files(f"src/{module}/contrib/{name}")
+        remove_files(f"src/{module}_tests/contrib/test_{name}")
+    elif name == "operator":
+        for submodule in ["func", "linop", "map"]:
+            remove_files(f"src/{module}/operator/{submodule}")
+        remove_files(f"src/{module}_tests/test_operator")
+    elif name in ["stop", "solver"]:
+        remove_files(f"src/{module}/opt/{name}")
+        remove_files(f"src/{module}_tests/opt/test_{name}")
+
+    else:
+        remove_files(f"src/{module}/{name}")
+        remove_files(f"src/{module}_tests/test_{name}.py")
+
     logger.debug(f"removing {module}/{name}.py")
     {% endif %}
     {% endfor %}

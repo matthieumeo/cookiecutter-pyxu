@@ -20,7 +20,7 @@ from .solver import GradientDescent
 from .stop import Deadline
 {% endif %}
 __all__ = (
-    { % if cookiecutter.include_data_plugin == 'y' -%}
+    {% if cookiecutter.include_data_plugin == 'y' -%}
     "SheppLogan",
     {% endif %}{% if cookiecutter.include_math_plugin == 'y' -%}
     "eigh",

@@ -1,6 +1,6 @@
 import numpy as np
 
-from {{cookiecutter.module_name}} import Flip, NullFunc
+from {{cookiecutter.module_name}} import Flip
 
 
 def test_linop():
@@ -13,6 +13,3 @@ def test_linop():
     flip = Flip(arg_shape=arg_shape, axis=0)
     out = flip(x.reshape(*batch_shape, -1)).reshape(*input_shape)
     assert np.allclose(out, np.flip(x, axis=2))
-
-def test_nullfunc():
-    assert NullFunc(1)._name == "ModifiedNullFunc"

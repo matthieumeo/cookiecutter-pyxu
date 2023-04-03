@@ -11,7 +11,7 @@ def test_math():
     input_shape = batch_shape + arg_shape
     x = rng.normal(size=input_shape)
     x += x.swapaxes(2,3)
-    w, v = eigh(x.reshape(*batch_shape, -1)).reshape(*input_shape)
+    w, v = eigh(x.reshape(*batch_shape, -1), arg_shape=arg_shape)
     w_np, v_np = np.linalg.eigh(x)
-    assert np.allclose(v, v_np)
-    assert np.allclose(w, w_np)
+    assert np.allclose(v.ravel(), v_np.ravel())
+    assert np.allclose(w.ravel(), w_np.ravel())
