@@ -87,7 +87,11 @@ Your plugin template is ready!  Next steps:
      git commit -m 'initial commit'
 
      # you probably want to install your new package into your environment
-     pip install -e ."""
+     
+     my_env=<CONDA ENVIRONMENT NAME>
+     conda create --name "${my_env} python=3.9
+     conda activate "${my_env}"
+     python -m pip install -e ."""
     else:
         msg +="""
 Your plugin template is ready!  Next steps:
@@ -95,8 +99,12 @@ Your plugin template is ready!  Next steps:
 1. `cd` into your new directory
 
      cd {{ cookiecutter.plugin_name }}
-     # you probably want to install your new package into your env
-     pip install -e ."""
+     # you probably want to install your new package into your environment
+     
+     my_env=<CONDA ENVIRONMENT NAME>
+     conda create --name "${my_env} python=3.9
+     conda activate "${my_env}"
+     python -m pip install -e ."""
 
 {% if cookiecutter.install_precommit == 'y' %}
     # try to install and update pre-commit
