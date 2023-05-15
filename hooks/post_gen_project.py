@@ -89,7 +89,7 @@ Your plugin template is ready!  Next steps:
      # you probably want to install your new package into your environment
      
      my_env=<CONDA ENVIRONMENT NAME>
-     conda create --name "${my_env} python=3.9
+     conda create --name "${my_env}" python=3.11
      conda activate "${my_env}"
      python -m pip install -e ."""
     else:
@@ -102,7 +102,7 @@ Your plugin template is ready!  Next steps:
      # you probably want to install your new package into your environment
      
      my_env=<CONDA ENVIRONMENT NAME>
-     conda create --name "${my_env} python=3.9
+     conda create --name "${my_env}" python=3.11
      conda activate "${my_env}"
      python -m pip install -e ."""
 
