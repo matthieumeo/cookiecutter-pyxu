@@ -15,8 +15,11 @@ ALL_TEMP_FOLDERS = ["licenses"]
 
 
 def remove_files(filepath):
-    shutil.rmtree(os.path.join(PROJECT_DIRECTORY, filepath), ignore_errors=True)
-
+    if os.path.exists(filepath):
+        if os.path.isdir(filepath):
+            shutil.rmtree(os.path.join(PROJECT_DIRECTORY, filepath), ignore_errors=True)
+        elif os.path.isfile(filepath):
+            os.remove(filepath)
 
 def remove_temp_folders(temp_folders):
     for folder in temp_folders:
@@ -26,20 +29,28 @@ def remove_temp_folders(temp_folders):
 
 def remove_unrequested_plugin_examples():
     module = "{{ cookiecutter.module_name }}"
+    contrib_list = []
+    opt_list = []
     {% for key, value in cookiecutter.items() %}
     {% if key.startswith('include_') and key.endswith("_plugin") and value != 'y' %}
     name = "{{ key }}".replace("include_", "").replace("_plugin", "")
     if name in ["data", "io", "pipeline"]:
         remove_files(f"src/{module}/contrib/{name}")
-        remove_files(f"src/{module}_tests/contrib/test_{name}")
+        remove_files(f"src/{module}_tests/test_contrib/test_{name}.py")
+        contrib_list.append(name)
+        if set(contrib_list) == {"data", "io", "pipeline"}:
+            remove_files(f"src/{module}/contrib")
+            remove_files(f"src/{module}_tests/test_contrib")
     elif name == "operator":
-        for submodule in ["func", "linop", "map"]:
-            remove_files(f"src/{module}/operator/{submodule}")
+        remove_files(f"src/{module}/operator")
         remove_files(f"src/{module}_tests/test_operator")
     elif name in ["stop", "solver"]:
         remove_files(f"src/{module}/opt/{name}")
-        remove_files(f"src/{module}_tests/opt/test_{name}")
-
+        remove_files(f"src/{module}_tests/test_opt/test_{name}.py")
+        opt_list.append(name)
+        if set(opt_list) == {"stop", "solver"}:
+            remove_files(f"src/{module}/opt")
+            remove_files(f"src/{module}_tests/test_opt")
     else:
         remove_files(f"src/{module}/{name}")
         remove_files(f"src/{module}_tests/test_{name}.py")
