@@ -1,5 +1,3 @@
-__all__ = ["GradientDescent"]
-
 import itertools
 import warnings
 
