@@ -15,9 +15,9 @@ from .math import eigh
 {% endif %}{% if cookiecutter.include_operator_plugin == 'y' %}
 from .operator import Flip, NullFunc
 {% endif %}{% if cookiecutter.include_solver_plugin == 'y' -%}
-from .solver import GradientDescent
+from .opt import GradientDescent
 {% endif %}{% if cookiecutter.include_stop_plugin == 'y' -%}
-from .stop import Deadline
+from .opt import Deadline
 {% endif %}
 __all__ = (
     {% if cookiecutter.include_data_plugin == 'y' -%}
