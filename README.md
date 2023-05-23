@@ -108,10 +108,55 @@ git commit -m 'initial commit'
    git remote add origin https://github.com/sirisaac/pycsou-gradient-descent.git
    git push -u origin main
    ```
+   
+### Setup a local environment
+
+It is recommended to setup a local Python emvironment to develop and test your plugin. With [conda], you can use:
+   ```bash
+   conda create --name <your-env-name>
+   ```
+Your probably want to install your new package into this environment. ``Pycsou`` is already set as a dependency,
+simply add the other required dependencies in the ``setup.cfg`` file and run the following commands.
+   ```bash
+   cd <your-repo-name>
+   pip install -e .
+   ```
+
+## Continuous Integration
+
+This Pycsou-plugin generator repository provides you with already-parametrized continuous integration tools.
+
+### Pre-commit
+
+This template includes a default yaml configuration for [pre-commit](https://pre-commit.com/).
+Among other things, it includes checks for best practices in Pycsou plugins.
+You may edit the config at `.pre-commit-config.yaml`
+
+To use it run:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+You can also have these checks run automatically for you when you push to github
+by installing [pre-commit ci](https://pre-commit.ci/) on your repository.
+
+
+### Running tests locally
+
+You can run your tests locally with [pytest](https://docs.pytest.org/en/7.1.x/).
+You'll need to make sure that your package is installed in your environment,
+along with testing requirements (specified in the setup.cfg `extras_require` section):
+
+   ```bash
+   pip install -e ".[testing]"
+   pytest
+   ```
 
 ### Monitor testing and coverage
 
-The repository should already be setup to run your tests each time you push an
+The repository is already setup to run your tests automatically each time you push an
 update (configuration is in `.github/workflows/test_and_deploy.yml`). You can
 monitor them in the "Actions" tab of your github repository. If you're
 following along, go have a look... they should be running right now!
@@ -123,7 +168,7 @@ When the tests are done, test coverage will be viewable at
 ### Set up automatic deployments
 
 Your new package is also nearly ready to automatically deploy to [PyPI]
-(whenever you create a tagged release), so that your users can simply `pip install` your package. You just need to create an [API token to authenticate
+(whenever you create a tagged release), so that your users can simply `pip install` your package. To do so, you just need to create an [API token to authenticate
 with PyPi](https://pypi.org/help/#apitoken), and then add it to your github
 repository:
 
@@ -146,7 +191,8 @@ Each time you want to deploy a new version, you just need to create a tagged
 commit, and push it to your main branch on github. Your package is set up to
 use [setuptools_scm](https://github.com/pypa/setuptools_scm) for version
 management, meaning you don't need to hard-code your version anywhere in your
-package. It will be inferred from the tag each time you release.
+package. It will be inferred from the tag each time you release. The deployment 
+is also handled with the [github actions] using the same worflow file `.github/workflows/test_and_deploy.yml`.
 
 ```bash
 # the tag will be used as the version string for your package
@@ -172,19 +218,6 @@ and available for pip install with:
 pip install pycsou-gradient-descent
 ```
 
-### Running tests locally
-
-Tests are automatically setup to run on github when you push to your repository.
-
-You can run your tests locally with [pytest](https://docs.pytest.org/en/7.1.x/).
-You'll need to make sure that your package is installed in your environment,
-along with testing requirements (specified in the setup.cfg `extras_require` section):
-
-```bash
-pip install -e ".[testing]"
-pytest
-```
-
 ### Create your documentation
 
 Documentation generation is not included in this template.
@@ -195,23 +228,7 @@ documentation generation tools:
 2. [MkDocs]
 3. [JupyterBook]
 
-### Pre-commit
-
-This template includes a default yaml configuration for [pre-commit](https://pre-commit.com/).
-Among other things, it includes checks for best practices in Pycsou plugins.
-You may edit the config at `.pre-commit-config.yaml`
-
-To use it run:
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-You can also have these checks run automatically for you when you push to github
-by installing [pre-commit ci](https://pre-commit.ci/) on your repository.
-
-## Features
+## Summary of the features
 
 - Installable [PyPI] package
 - [tox] test suite, testing various python versions and platforms.
@@ -271,3 +288,4 @@ is free and open source software.
 [github actions]: https://github.com/features/actions
 [new github repository]: https://help.github.com/en/github/getting-started-with-github/create-a-repo
 [setuptools_scm]: https://github.com/pypa/setuptools_scm
+[conda]: https://docs.conda.io/en/latest/
