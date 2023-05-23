@@ -68,15 +68,19 @@ pycsou-gradient-descent/
 ├── README.md
 ├── setup.cfg
 ├── src
-│   ├──__init__.py
-│   └──pycsou_gradient_descent
-│       ├── __init__.py
-│       ├── _solver.py
-│       ├── _stop.py
-│       └── _tests
-│            ├── __init__.py
-│            ├── test_solver.py
-│            └── test_stop.py
+│   ├── __init__.py
+│   ├── pycsou_gradient_descent
+│   │    ├── __init__.py
+│   │    └── opt
+│   │       ├── solver
+│   │       │   └── __init__.py
+│   │       └── stop
+│   │           └── __init__.py
+│   └── pycsou_gradient_descent_tests
+│        └── test_opt
+│             ├── __init__.py
+│             ├── test_solver.py
+│             └── test_stop.py
 │
 └── tox.ini
 ```
