@@ -95,11 +95,11 @@ git add .
 git commit -m 'initial commit'
 ```
 
-### Upload it to github
+### Upload it to GitHub
 
 1. Create a [new github repository]
 
-2. Add your newly created github repo as a remote and push:
+2. Add your newly created GitHub repo as a remote and push:
 
    ```bash
    # here, continuing with the example above...
@@ -111,11 +111,11 @@ git commit -m 'initial commit'
    
 ### Setup a local environment
 
-It is recommended to setup a local Python emvironment to develop and test your plugin. With [conda], you can use:
+It is recommended to set up a local Python environment to develop and test your plugin. With [conda], you can use:
    ```bash
    conda create --name <your-env-name>
    ```
-Your probably want to install your new package into this environment. ``Pycsou`` is already set as a dependency,
+You will probably want to install your new package into this environment. ``Pycsou`` is already set as a dependency,
 simply add the other required dependencies in the ``setup.cfg`` file and run the following commands.
    ```bash
    cd <your-repo-name>
@@ -139,7 +139,7 @@ pip install pre-commit
 pre-commit install
 ```
 
-You can also have these checks run automatically for you when you push to github
+You can also have these checks run automatically for you when you push to GitHub
 by installing [pre-commit ci](https://pre-commit.ci/) on your repository.
 
 
@@ -158,7 +158,7 @@ along with testing requirements (specified in the setup.cfg `extras_require` sec
 
 The repository is already setup to run your tests automatically each time you push an
 update (configuration is in `.github/workflows/test_and_deploy.yml`). You can
-monitor them in the "Actions" tab of your github repository. If you're
+monitor them in the "Actions" tab of your GitHub repository. If you're
 following along, go have a look... they should be running right now!
 
 When the tests are done, test coverage will be viewable at
@@ -169,7 +169,7 @@ When the tests are done, test coverage will be viewable at
 
 Your new package is also nearly ready to automatically deploy to [PyPI]
 (whenever you create a tagged release), so that your users can simply `pip install` your package. To do so, you just need to create an [API token to authenticate
-with PyPi](https://pypi.org/help/#apitoken), and then add it to your github
+with PyPi](https://pypi.org/help/#apitoken), and then add it to your GitHub
 repository:
 
 1. If you don't already have one, [create an
@@ -179,8 +179,8 @@ repository:
    [account settings](https://pypi.org/manage/account/) go to the API tokens
    section and select "Add API token". Make sure to copy it somewhere safe!
 4. [Create a new encrypted
-   secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)"
-   in your github repository with the name "TWINE_API_KEY", and paste in your
+   secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)
+   in your GitHub repository with the name "TWINE_API_KEY", and paste in your
    API token.
 
 You are now setup for automatic deployment!
@@ -188,11 +188,11 @@ You are now setup for automatic deployment!
 ### Automatic deployment and version management
 
 Each time you want to deploy a new version, you just need to create a tagged
-commit, and push it to your main branch on github. Your package is set up to
+commit, and push it to your main branch on GitHub. Your package is set up to
 use [setuptools_scm](https://github.com/pypa/setuptools_scm) for version
 management, meaning you don't need to hard-code your version anywhere in your
 package. It will be inferred from the tag each time you release. The deployment 
-is also handled with the [github actions] using the same worflow file `.github/workflows/test_and_deploy.yml`.
+is also handled with the [github actions] using the same workflow file `.github/workflows/test_and_deploy.yml`.
 
 ```bash
 # the tag will be used as the version string for your package
@@ -206,7 +206,7 @@ git push --follow-tags
 > Note: as of git 2.4.1, you can set `follow-tags` as default with
 > `git config --global push.followTags true`
 
-Monitor the "actions" tab on your github repo for progress... and when the
+Monitor the "actions" tab on your GitHub repo for progress... and when the
 "deploy" step is finished, your new version should be visible on pypi:
 
 `https://pypi.org/project/<your-package-name>/`
