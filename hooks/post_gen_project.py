@@ -34,14 +34,8 @@ def remove_unrequested_plugin_examples():
     {% for key, value in cookiecutter.items() %}
     {% if key.startswith('include_') and key.endswith("_plugin") and value != 'y' %}
     name = "{{ key }}".replace("include_", "").replace("_plugin", "")
-    if name in ["data", "io", "pipeline"]:
-        remove_files(f"src/{module}/contrib/{name}")
-        remove_files(f"src/{module}_tests/test_contrib/test_{name}.py")
-        contrib_list.append(name)
-        if set(contrib_list) == {"data", "io", "pipeline"}:
-            remove_files(f"src/{module}/contrib")
-            remove_files(f"src/{module}_tests/test_contrib")
-    elif name == "operator":
+
+    if name == "operator":
         remove_files(f"src/{module}/operator")
         remove_files(f"src/{module}_tests/test_operator")
     elif name in ["stop", "solver"]:

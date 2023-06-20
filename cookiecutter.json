@@ -11,9 +11,6 @@
     "include_operator_plugin": "n",
     "include_solver_plugin": "n",
     "include_stop_plugin": "n",
-    "include_data_plugin": "n",
-    "include_io_plugin": "n",
-    "include_pipeline_plugin": "n",
     "use_git_tags_for_versioning": "n",
     "install_precommit": "n",
     "license": [
