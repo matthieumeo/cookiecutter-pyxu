@@ -11,6 +11,7 @@
     "include_operator_plugin": "n",
     "include_solver_plugin": "n",
     "include_stop_plugin": "n",
+    "include_contrib_plugin": "n",
     "use_git_tags_for_versioning": "n",
     "install_precommit": "n",
     "license": [

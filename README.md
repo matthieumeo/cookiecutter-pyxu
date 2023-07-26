@@ -39,6 +39,7 @@ include_math_plugin [y]: n
 include_operator_plugin [y]: n
 include_solver_plugin [y]:
 include_stop_plugin [y]: 
+include_contrib_plugin [n]: n
 use_git_tags_for_versioning [n]:
 Select license:
 1 - BSD-3
