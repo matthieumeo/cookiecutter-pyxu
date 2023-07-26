@@ -31,16 +31,17 @@ Select github_repository_url:
 1 - https://github.com/sirisaac/pycsou-gradient-descent
 2 - provide later
 Choose from 1, 2 [1]:
-module_name [gradient_descent]: pycsou_gradient_descent
-display_name [pycsou FooBar]: Gradient Descent
-short_description [A simple plugin to use with Pycsou]:
+module_name [pycsou_gradient_descent]:
+display_name [Pycsou FooBar Collection]: Gradient Descent
+short_description [A simple plugin to use the FooBar collection within Pycsou]: A simple gradient descent solver for Pycsou 
 # you can select from various plugin template examples
 include_math_plugin [y]: n
-include_operator_plugin [y]: n
-include_solver_plugin [y]:
-include_stop_plugin [y]: 
+include_operator_plugin [n]: 
+include_solver_plugin [n]:y
+include_stop_plugin [n]: n
 include_contrib_plugin [n]: n
 use_git_tags_for_versioning [n]:
+install_precommit [n]: 
 Select license:
 1 - BSD-3
 2 - MIT
@@ -48,7 +49,7 @@ Select license:
 4 - Apache Software License 2.0
 5 - GNU LGPL v3.0
 6 - GNU GPL v3.0
-Choose from 1, 2, 3, 4, 5, 6 (1, 2, 3, 4, 5, 6) [1]:
+Choose from 1, 2, 3, 4, 5, 6 [1]:
 
 ```
 
@@ -59,31 +60,36 @@ For more detailed information on each prompt see the [prompts reference](./PROMP
 
 ```no-highlight
 pycsou-gradient-descent/
-│
+├── .git
 ├── .github
-│   └── workflows
-│      └── test_and_deploy.yml
+│         └── workflows
+│             └── test_and_deploy.yml
+├── .gitignore
+├── __init__.py
 ├── LICENSE
 ├── MANIFEST.in
+├── .pre-commit-config.yaml
+├── .pycsou-fair
+│         ├── config.yml
+│         └── DESCRIPTION.md
 ├── pyproject.toml
 ├── README.md
 ├── setup.cfg
 ├── src
-│   ├── __init__.py
-│   ├── pycsou_gradient_descent
-│   │    ├── __init__.py
-│   │    └── opt
-│   │       ├── solver
-│   │       │   └── __init__.py
-│   │       └── stop
-│   │           └── __init__.py
-│   └── pycsou_gradient_descent_tests
-│        └── test_opt
+│         ├── __init__.py
+│         ├── pycsou_gradient_descent
+│         │       ├── __init__.py
+│         │       └── opt
+│         │           ├── __init__.py
+│         │           └── solver
+│         │               └── __init__.py
+│         └── pycsou_gradient_descent_tests
 │             ├── __init__.py
-│             ├── test_solver.py
-│             └── test_stop.py
-│
+│             └── test_opt
+│                 ├── __init__.py
+│                 └── test_solver.py
 └── tox.ini
+
 ```
 
 ### Initialize a git repository in your package
@@ -102,7 +108,7 @@ git commit -m 'initial commit'
 
 ### Upload it to GitHub
 
-1. Create a [new github repository]
+1. Create a [new github repository] with the name `github_repository_url` you indicated.
 
 2. Add your newly created GitHub repo as a remote and push:
 
@@ -118,14 +124,24 @@ git commit -m 'initial commit'
 
 It is recommended to set up a local Python environment to develop and test your plugin. With [conda], you can use:
    ```bash
-   conda create --name <your-env-name>
+   my_env=<CONDA ENVIRONMENT NAME>
+   conda create --name "${my_env}" python=3.11
+   conda activate "${my_env}"
+   python -m pip install -e .
+
    ```
 You will probably want to install your new package into this environment. ``Pycsou`` is already set as a dependency,
 simply add the other required dependencies in the ``setup.cfg`` file and run the following commands.
    ```bash
    cd <your-repo-name>
-   pip install -e .
+   python -m pip install -e .
    ```
+
+## Develop new features
+
+The cookiecutter offers a predefined hierarchy of classes and functions to aid novice Pycsou developers in creating 
+novel features. At this point, the developer can create new functionalities following the [pycsou_dev_notes] and 
+structure predefined by the cookiecutter.
 
 ## Continuous Integration
 
@@ -177,8 +193,7 @@ Your new package is also nearly ready to automatically deploy to [PyPI]
 with PyPi](https://pypi.org/help/#apitoken), and then add it to your GitHub
 repository:
 
-1. If you don't already have one, [create an
-   account](https://pypi.org/account/register/) at [PyPI]
+1. If you don't already have one, [create an account](https://pypi.org/account/register/) at [PyPI]
 2. Verify your email address with PyPI, (if you haven't already)
 3. Generate an [API token](https://pypi.org/help/#apitoken) at PyPi: In your
    [account settings](https://pypi.org/manage/account/) go to the API tokens
@@ -272,6 +287,7 @@ is free and open source software.
 [documentation]: https://cookiecutter-pycsou-plugin.readthedocs.io/en/latest/ "Documentation"
 [cookiecutter]: https://github.com/audreyr/cookiecutter
 [pycsou]: https://github.com/matthieumeo/pycsou
+[pycsou_dev_notes]: https://github.com/matthieumeo/pycsou/blob/v2-dev/doc/dev_notes.rst
 [pypi]: https://pypi.org/
 [tox]: https://tox.readthedocs.io/en/latest/
 [file an issue]: https://github.com/pycsou/cookiecutter-pycsou-plugin/issues
