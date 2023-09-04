@@ -5,8 +5,8 @@ import pyxu.abc as pxa
 import pyxu.operator.func as pxof
 import pyxu.runtime as pxrt
 import pyxu.util as pxu
-import pyxu.util.ptype as pxt
-import pyxu.util.warning as pxuw
+import pyxu.info.ptype as pxt
+import pyxu.info.warning as pxuw
 
 __all__ = [
     "GradientDescent",
@@ -44,7 +44,7 @@ class GradientDescent(pxa.Solver):
     The relative norm change of the primal variable is used as the default stopping criterion.
     By default, the algorithm stops when the norm of the difference between two consecutive GradientDescent
     iterates :math:`\{\mathbf{x}_n\}_{n\in\mathbb{N}}` is smaller than 1e-4.
-    Different stopping criteria can be used. (see :py:mod:`~pxsou.opt.solver.stop`.)
+    Different stopping criteria can be used. (see :py:mod:`~pyxu.opt.solver.stop`.)
 
     ``GradientDescent.fit()`` **Parameterization**
 
@@ -99,7 +99,7 @@ class GradientDescent(pxa.Solver):
 
         if tau is None:
             try:
-                mst["tau"] = pxrt.coerce(1 / self._f.diff_lipschitz())
+                mst["tau"] = pxrt.coerce(1 / self._f.estimate_diff_lipschitz(method="svd", tol=0.1))
             except ZeroDivisionError as exc:
                 # _f is constant-valued: \tau is a free parameter.
                 mst["tau"] = 1
@@ -143,7 +143,7 @@ class GradientDescent(pxa.Solver):
         mst["x_prev"], mst["x"] = mst["x"], z
 
     def default_stop_crit(self) -> pxa.StoppingCriterion:
-        from pxsou.opt.stop import RelError
+        from pyxu.opt.stop import RelError
 
         stop_crit = RelError(
             eps=1e-4,

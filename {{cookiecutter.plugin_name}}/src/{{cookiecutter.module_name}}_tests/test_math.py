@@ -1,7 +1,7 @@
 import numpy as np
-import pyxu.runtime as pxrt
-import pyxu.util.deps as pxd
 import pytest
+import pyxu.info.deps as pxd
+import pyxu.runtime as pxrt
 
 from {{cookiecutter.module_name}} import eigh
 

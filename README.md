@@ -1,4 +1,4 @@
-# cookiecutter-pyxu-plugin
+# cookiecutter-pyxu
 
 [Cookiecutter] template for authoring [pyxu] plugins.
 
@@ -12,7 +12,7 @@ Install [Cookiecutter] and generate a new Pyxu plugin project:
 
 ```bash
 pip install cookiecutter
-cookiecutter https://github.com/matthieumeo/cookiecutter-pyxu-plugin
+cookiecutter https://github.com/matthieumeo/cookiecutter-pyxu
 ```
 
 Cookiecutter prompts you for information regarding your plugin
@@ -166,13 +166,12 @@ by installing [pre-commit ci](https://pre-commit.ci/) on your repository.
 
 ### Running tests locally
 
-You can run your tests locally with [pytest](https://docs.pytest.org/en/7.1.x/).
+You can run your tests locally with [tox] and [pytest].
 You'll need to make sure that your package is installed in your environment,
 along with testing requirements (specified in the setup.cfg `extras_require` section):
 
    ```bash
-   pip install -e ".[testing]"
-   pytest
+   tox run
    ```
 
 ### Monitor testing and coverage
@@ -240,13 +239,8 @@ pip install pyxu-gradient-descent
 
 ### Create your documentation
 
-Documentation generation is not included in this template.
-We recommend following the getting started guides for one of the following 
-documentation generation tools:
-
-1. [Sphinx]
-2. [MkDocs]
-3. [JupyterBook]
+The documentation generation is generated with [Sphinx], based on the [Pydata-Sphinx-Theme].
+You can edit the `docs/index.rst` file to add your own documentation.
 
 ## Summary of the features
 
@@ -262,9 +256,7 @@ documentation generation tools:
 
 ## Resources
 
-Please consult the [pyxu plugin
-docs](https://pyxu-org.github.io/fair/contribute.html) for more information on
-how to create a plugin.
+Please consult the [pyxu plugin docs](https://pyxu-org.github.io/fair/contribute.html) for more information on how to create a plugin.
 
 Details on why this plugin template is using the `src` layout can be found [here](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure) and [here](https://hynek.me/articles/testing-packaging/)
 
@@ -275,37 +267,26 @@ issue] along with a detailed description.
 
 ## License
 
-Distributed under the terms of the [BSD-3] license, `cookiecutter-pyxu-plugin`
+Distributed under the terms of the [BSD-3] license, `cookiecutter-pyxu`
 is free and open source software.
 
 [pyxu organization]: https://github.com/matthieumeo/pyxu/
-[gitter_badge]: https://badges.gitter.im/Join%20Chat.svg
-[gitter]: https://gitter.im/pyxu/cookiecutter-pyxu-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge "Join Chat on Gitter.im"
-[travis_badge]: https://travis-ci.org/pyxu/cookiecutter-pyxu-plugin.svg?branch=main
-[travis]: https://travis-ci.org/pyxu/cookiecutter-pyxu-plugin "See Build Status on Travis CI"
-[docs_badge]: https://readthedocs.org/projects/cookiecutter-pyxu-plugin/badge/?version=latest
-[documentation]: https://cookiecutter-pyxu-plugin.readthedocs.io/en/latest/ "Documentation"
+[documentation]: https://pyxu-org.github.io/fair/contribute.html "Documentation"
 [cookiecutter]: https://github.com/audreyr/cookiecutter
 [pyxu]: https://github.com/matthieumeo/pyxu
-[pyxu_dev_notes]: https://github.com/matthieumeo/pyxu/blob/v2-dev/doc/dev_notes.rst
+[pyxu_dev_notes]: https://pyxu-org.github.io/fair/dev_notes.html
 [pypi]: https://pypi.org/
 [tox]: https://tox.readthedocs.io/en/latest/
-[file an issue]: https://github.com/pyxu/cookiecutter-pyxu-plugin/issues
+[pytest]: https://docs.pytest.org/en/7.1.x/
+[file an issue]: https://github.com/pyxu/cookiecutter-pyxu/issues
 [sphinx]: https://www.sphinx-doc.org/en/master/usage/quickstart.html
-[mkdocs]: https://www.mkdocs.org/getting-started/
-[jupyterbook]: https://jupyterbook.org/en/stable/start/your-first-book.html
+[Pydata-Sphinx-Theme]: https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html
 [mit]: http://opensource.org/licenses/MIT
 [mpl v2.0]: https://www.mozilla.org/media/MPL/2.0/index.txt
 [bsd-3]: http://opensource.org/licenses/BSD-3-Clause
 [gnu gpl v3.0]: http://www.gnu.org/licenses/gpl-3.0.txt
 [gnu lgpl v3.0]: http://www.gnu.org/licenses/lgpl-3.0.txt
 [apache v2.0]: http://www.apache.org/licenses/LICENSE-2.0
-[travis ci]: https://travis-ci.com/
-[appveyor]: http://www.appveyor.com/
-[pypa code of conduct]: https://www.pypa.io/en/latest/code-of-conduct/
-[shortbread]: https://github.com/audreyr/cookiecutter/releases/tag/1.4.0
-[osi_certified]: https://opensource.org/trademarks/osi-certified/web/osi-certified-120x100.png
-[osi]: https://opensource.org/
 [github actions]: https://github.com/features/actions
 [new github repository]: https://help.github.com/en/github/getting-started-with-github/create-a-repo
 [setuptools_scm]: https://github.com/pypa/setuptools_scm

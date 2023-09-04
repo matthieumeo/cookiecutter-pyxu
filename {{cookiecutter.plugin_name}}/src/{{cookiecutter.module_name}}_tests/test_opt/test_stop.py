@@ -1,22 +1,23 @@
 import datetime as dt
+
 import numpy as np
 from pyxu.operator.func import SquaredL2Norm
-from {{cookiecutter.module_name}} import GradientDescent
-from {{cookiecutter.module_name}} import Deadline
+
+from {{cookiecutter.module_name}} import GradientDescent, Deadline
+
 
 def test_stop():
-    deadline = Deadline(
-        t=dt.datetime(
-            year=2023,
-            month=2,
-            day=29,
-            hour=11,
-            minute=59,
-            second=59)
-    )
+    # Test that the solver runs only for 1 second
+    # Get the current time
+    init_time = dt.datetime.now()
+    # Calculate the time 10 seconds in the future
+    future_time = init_time + dt.timedelta(seconds=1.)
+
+    deadline = Deadline(t=future_time)
     N = 10
     y = np.arange(N)
     sl2 = SquaredL2Norm(dim=N).asloss(y)
     gd = GradientDescent(f=sl2)
-    gd.fit(x0=np.random.randn(N), acceleration=True, stop_crit=deadline)
-    assert np.allclose(gd.solution(), y)
+    gd.fit(x0=np.random.randn(N), stop_crit=deadline)
+    end_time = dt.datetime.now()
+    assert end_time - init_time < dt.timedelta(seconds=1.1)

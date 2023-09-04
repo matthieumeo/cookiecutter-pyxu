@@ -5,7 +5,7 @@ import numpy as np
 import pyxu.abc.operator as pxo
 import pyxu.runtime as pxrt
 import pyxu.util as pxu
-import pyxu.util.ptype as pxt
+import pyxu.info.ptype as pxt
 
 __all__ = ["Flip"]
 

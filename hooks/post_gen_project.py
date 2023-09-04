@@ -169,13 +169,10 @@ Your plugin template is ready!  Next steps:
         User Support = https://github.com/your-repo-username/your-repo-name/issues"""
 {% endif %}
     msg += """
-5. Read the README for more info: https://github.com/matthieumeo/cookiecutter-pyxu-plugin
+5. Read the README for more info: https://github.com/matthieumeo/cookiecutter-pyxu
 
-6. We've provided a template description for your plugin page at `.pyxu/DESCRIPTION.md`.
-   You'll likely want to edit this before you publish your plugin.
-
-7. Consider customizing the rest of your plugin metadata for display on the Pyxu-FAIR:
-   https://pyxu-org.github.io/fair/index.html
+6. We've provided a template description for your plugin page at `.pyxu-fair/DESCRIPTION.md`.
+   You'll likely want to edit this before you publish your plugin to the Pyxu-FAIR (https://pyxu-org.github.io/fair/index.html).
 """
 
     print(msg)

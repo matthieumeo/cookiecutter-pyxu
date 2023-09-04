@@ -1,4 +1,4 @@
-import pyxu.util.ptype as pxt
+import pyxu.info.ptype as pxt
 import pyxu.operator.linop as pxl
 
 __all__ = ["NullFunc"]

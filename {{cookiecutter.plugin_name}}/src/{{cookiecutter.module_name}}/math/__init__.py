@@ -1,8 +1,8 @@
 import numba
 import numpy as np
+import pyxu.info.deps as pxd
+import pyxu.info.ptype as pxt
 import pyxu.util as pxu
-import pyxu.util.deps as pxd
-import pyxu.util.ptype as pxt
 
 __all__ = ["eigh"]
 
