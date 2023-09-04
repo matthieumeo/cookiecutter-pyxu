@@ -1,6 +1,6 @@
 import datetime as dt
 import numpy as np
-from pycsou.operator.func import SquaredL2Norm
+from pyxu.operator.func import SquaredL2Norm
 from {{cookiecutter.module_name}} import GradientDescent
 from {{cookiecutter.module_name}} import Deadline
 

@@ -1,5 +1,5 @@
 import numpy as np
-from pycsou.operator.func import SquaredL2Norm
+from pyxu.operator.func import SquaredL2Norm
 from {{cookiecutter.module_name}} import GradientDescent
 
 def test_something():

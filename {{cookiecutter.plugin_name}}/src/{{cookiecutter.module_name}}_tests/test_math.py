@@ -1,6 +1,6 @@
 import numpy as np
-import pycsou.runtime as pycrt
-import pycsou.util.deps as pycd
+import pyxu.runtime as pxrt
+import pyxu.util.deps as pxd
 import pytest
 
 from {{cookiecutter.module_name}} import eigh
@@ -13,7 +13,7 @@ def allclose(x, y, xp, sign_matters=True):
         return xp.allclose(xp.abs(x), xp.abs(y))
 
 
-@pytest.fixture(params=pycd.NDArrayInfo)
+@pytest.fixture(params=pxd.NDArrayInfo)
 def ndi(request):
     ndi_ = request.param
     if ndi_.module() is None:
@@ -21,7 +21,7 @@ def ndi(request):
     return ndi_
 
 
-@pytest.fixture(params=pycrt.Width)
+@pytest.fixture(params=pxrt.Width)
 def width(request):
     return request.param
 

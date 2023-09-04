@@ -1,13 +1,13 @@
 import numba
 import numpy as np
-import pycsou.util as pycu
-import pycsou.util.deps as pycd
-import pycsou.util.ptype as pyct
+import pyxu.util as pxu
+import pyxu.util.deps as pxd
+import pyxu.util.ptype as pxt
 
 __all__ = ["eigh"]
 
 
-def eigh(arr: pyct.NDArray, arg_shape: pyct.NDArrayShape, normalize=True):
+def eigh(arr: pxt.NDArray, arg_shape: pxt.NDArrayShape, normalize=True):
     r"""
     Batch computation of the eigenvalues and eigenvectors of a batch (:math:`\mathcal{N}`-shaped, where
     :math:`\mathcal{N} = (N_{1}, \cdots, N_{k})`) of complex Hermitian (conjugate symmetric) or a real symmetric
@@ -24,22 +24,22 @@ def eigh(arr: pyct.NDArray, arg_shape: pyct.NDArrayShape, normalize=True):
 
     Parameters
     ----------
-    arr: (…, M, M) pyct.NDArray
-    arg_shape: pyct.NDArrayShape
+    arr: (…, M, M) pxt.NDArray
+    arg_shape: pxt.NDArrayShape
     normalize: bool
 
     Returns
     -------
-    w: (…, M) pyct.NDArray
+    w: (…, M) pxt.NDArray
         The eigenvalues in ascending order, each repeated according to its multiplicity.
-    v: (…, M, M) pyct.NDArray
+    v: (…, M, M) pxt.NDArray
         The column v[..., i] is the normalized eigenvector corresponding to the eigenvalue w[..., i].
     """
     assert len(np.unique(arg_shape))
     st_sh = arr.shape[:-1]
     st_size = np.prod(st_sh)
-    N = pycd.NDArrayInfo
-    xp = pycu.get_array_module(arr)
+    N = pxd.NDArrayInfo
+    xp = pxu.get_array_module(arr)
 
     if N.from_obj(arr) == N.DASK:
         chunksize = arr.chunksize
@@ -363,8 +363,8 @@ def compute_eigenvectors_3x3_gpu(arr, eigval, out):
 
 
 def eigh_dispatcher(arr, w, v):
-    xp = pycu.get_array_module(arr)
-    N = pycd.NDArrayInfo
+    xp = pxu.get_array_module(arr)
+    N = pxd.NDArrayInfo
     d = arr.shape[-1]
     if N.from_obj(arr) == N.CUPY:
         if d == 2:

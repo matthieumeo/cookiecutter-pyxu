@@ -1,13 +1,13 @@
-# Pycsou Plugin Prompt Reference
+# Pyxu Plugin Prompt Reference
 
-When you run Pycsou's cookiecutter for the first time to build a Pycsou plugin,
+When you run Pyxu's cookiecutter for the first time to build a Pyxu plugin,
 you will be asked for some configuration options. The answers to these questions
 will be used to configure certain aspects of your plugin package, such as defining
 its name and license, or including preferred hooks or example components, for instance.
 
 This document describes in detail each of the prompts, and how your answer will affect
 your plugin. If you're planning on publishing your plugin to PyPI (and by extension, the
-[Pycsou-FAIR](https://www.pycsou-fair.org/)) this document provides detailed documentation
+[Pyxu-FAIR](https://pyxu-org.github.io/fair/index.html)) this document provides detailed documentation
 on customizing your listing.
 
 ## full_name
@@ -49,7 +49,7 @@ pip install plugin_name
 
 The convention for these packages is that they should have short, all-lowercase
 names, with hyphens preferred over underscores for separating words. Note that
-for user-facing text, Pycsou and the Pycsou-FAIR will use the `display_name` (below).
+for user-facing text, Pyxu and the Pyxu-FAIR will use the `display_name` (below).
 
 ## github_repository_url
 
@@ -63,7 +63,7 @@ or if you do not wish to provide a url at all. You can then add this link to you
 ## display_name
 
 User-facing text to display as the name of this plugin. For example, this will be
-used by the Pycsou-FAIR. It should be 3-40 characters long. 
+used by the Pyxu-FAIR. It should be 3-40 characters long. 
 
 ## short_description
 
@@ -90,7 +90,7 @@ add `version = 0.0.1` to your `setup.cfg`.
 If you choose `"y"` for this prompt, your package will be set up to have
 [`setuptools_scm`](https://github.com/pypa/setuptools_scm) manage versions for
 you based on your git tags. See the
-[readme](https://github.com/pycsou/cookiecutter-pycsou-plugin#automatic-deployment-and-version-management)
+[Contributing to the Pyxu-FAIR](https://pyxu-org.github.io/fair/contribute.html#automatic-deployment-and-version-management)
 for details.
 
 This option typically requires the least effort to manage versioning for your

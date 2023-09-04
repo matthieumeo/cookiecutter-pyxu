@@ -1,11 +1,11 @@
 import collections.abc as cabc
 import datetime as dt
 
-import pycsou.abc as pyca
+import pyxu.abc as pxa
 
 __all__ = ["Deadline"]
 
-class Deadline(pyca.StoppingCriterion):
+class Deadline(pxa.StoppingCriterion):
     """
     Stop iterative solver at a specified date and time.
     """

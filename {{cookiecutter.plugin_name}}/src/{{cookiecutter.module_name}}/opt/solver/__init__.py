@@ -1,19 +1,19 @@
 import itertools
 import warnings
 
-import pycsou.abc as pyca
-import pycsou.operator.func as pycof
-import pycsou.runtime as pycrt
-import pycsou.util as pycu
-import pycsou.util.ptype as pyct
-import pycsou.util.warning as pycuw
+import pyxu.abc as pxa
+import pyxu.operator.func as pxof
+import pyxu.runtime as pxrt
+import pyxu.util as pxu
+import pyxu.util.ptype as pxt
+import pyxu.util.warning as pxuw
 
 __all__ = [
     "GradientDescent",
 ]
 
 
-class GradientDescent(pyca.Solver):
+class GradientDescent(pxa.Solver):
     r"""
     Gradient Descent (GD) solver.
 
@@ -44,13 +44,13 @@ class GradientDescent(pyca.Solver):
     The relative norm change of the primal variable is used as the default stopping criterion.
     By default, the algorithm stops when the norm of the difference between two consecutive GradientDescent
     iterates :math:`\{\mathbf{x}_n\}_{n\in\mathbb{N}}` is smaller than 1e-4.
-    Different stopping criteria can be used. (see :py:mod:`~pycsou.opt.solver.stop`.)
+    Different stopping criteria can be used. (see :py:mod:`~pxsou.opt.solver.stop`.)
 
     ``GradientDescent.fit()`` **Parameterization**
 
-    x0: pyct.NDArray
+    x0: pxt.NDArray
         (..., N) initial point(s).
-    tau: pyct.Real
+    tau: pxt.Real
         Gradient step size.
         Defaults to :math:`1 / \beta` if unspecified.
     acceleration: bool
@@ -65,7 +65,7 @@ class GradientDescent(pyca.Solver):
 
     def __init__(
         self,
-        f: pyca.DiffFunc = None,
+        f: pxa.DiffFunc = None,
         **kwargs,
     ):
         kwargs.update(
@@ -84,22 +84,22 @@ class GradientDescent(pyca.Solver):
         else:
             self._f = f
 
-    @pycrt.enforce_precision(i=("x0", "tau"))
+    @pxrt.enforce_precision(i=("x0", "tau"))
     def m_init(
         self,
-        x0: pyct.NDArray,
-        tau: pyct.Real = None,
+        x0: pxt.NDArray,
+        tau: pxt.Real = None,
         acceleration: bool = True,
     ):
         mst = self._mstate  # shorthand
         mst["x"] = mst["x_prev"] = x0
 
         if self._f is None:
-            self._f = pycof.NullFunc(dim=x0.shape[-1])
+            self._f = pxof.NullFunc(dim=x0.shape[-1])
 
         if tau is None:
             try:
-                mst["tau"] = pycrt.coerce(1 / self._f.diff_lipschitz())
+                mst["tau"] = pxrt.coerce(1 / self._f.diff_lipschitz())
             except ZeroDivisionError as exc:
                 # _f is constant-valued: \tau is a free parameter.
                 mst["tau"] = 1
@@ -109,7 +109,7 @@ class GradientDescent(pyca.Solver):
                         r"Choosing \tau manually may lead to faster convergence.",
                     ]
                 )
-                warnings.warn(msg, pycuw.AutoInferenceWarning)
+                warnings.warn(msg, pxuw.AutoInferenceWarning)
         else:
             try:
                 assert tau > 0
@@ -118,9 +118,9 @@ class GradientDescent(pyca.Solver):
                 raise ValueError(f"tau must be positive, got {tau}.")
 
         if acceleration:
-            mst["a"] = (pycrt.coerce(k / (k + 3)) for k in itertools.count(start=0))
+            mst["a"] = (pxrt.coerce(k / (k + 3)) for k in itertools.count(start=0))
         else:
-            mst["a"] = itertools.repeat(pycrt.coerce(0))
+            mst["a"] = itertools.repeat(pxrt.coerce(0))
 
     def m_step(self):
         mst = self._mstate  # shorthand
@@ -135,15 +135,15 @@ class GradientDescent(pyca.Solver):
 
         # In-place implementation of -----------------
         #   z = y - mst["tau"] * self._f.grad(y)
-        z = pycu.copy_if_unsafe(self._f.grad(y))
+        z = pxu.copy_if_unsafe(self._f.grad(y))
         z *= -mst["tau"]
         z += y
         # --------------------------------------------
 
         mst["x_prev"], mst["x"] = mst["x"], z
 
-    def default_stop_crit(self) -> pyca.StoppingCriterion:
-        from pycsou.opt.stop import RelError
+    def default_stop_crit(self) -> pxa.StoppingCriterion:
+        from pxsou.opt.stop import RelError
 
         stop_crit = RelError(
             eps=1e-4,
@@ -154,17 +154,17 @@ class GradientDescent(pyca.Solver):
         )
         return stop_crit
 
-    def objective_func(self) -> pyct.NDArray:
+    def objective_func(self) -> pxt.NDArray:
         func = lambda x: self._f.apply(x)
 
         y = func(self._mstate["x"])
         return y
 
-    def solution(self) -> pyct.NDArray:
+    def solution(self) -> pxt.NDArray:
         """
         Returns
         -------
-        x: pyct.NDArray
+        x: pxt.NDArray
             (..., N) solution.
         """
         data, _ = self.stats()

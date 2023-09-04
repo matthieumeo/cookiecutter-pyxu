@@ -2,16 +2,16 @@ import collections.abc as cabc
 
 import numpy as np
 
-import pycsou.abc.operator as pyco
-import pycsou.runtime as pycrt
-import pycsou.util as pycu
-import pycsou.util.ptype as pyct
+import pyxu.abc.operator as pxo
+import pyxu.runtime as pxrt
+import pyxu.util as pxu
+import pyxu.util.ptype as pxt
 
 __all__ = ["Flip"]
 
-class Flip(pyco.LinOp):
+class Flip(pxo.LinOp):
 
-    def __init__(self, arg_shape: pyct.NDArrayShape, axis: pyct.NDArrayAxis = None) -> pyct.OpT:
+    def __init__(self, arg_shape: pxt.NDArrayShape, axis: pxt.NDArrayAxis = None) -> pxt.OpT:
         r"""
         Reverse the order of elements in an array along the given axis.
 
@@ -19,9 +19,9 @@ class Flip(pyco.LinOp):
 
         Parameters
         ----------
-        arg_shape: pyct.NDArrayShape
+        arg_shape: pxt.NDArrayShape
             Shape of the data to be flipped.
-        axis: pyct.NDArrayAxis
+        axis: pxt.NDArrayAxis
             Axis or axes along which the input array is flipped.
             The default, axis=None, will flip all the in all the axis of the input array.
             If axis is negative it counts from the last to the first axis.
@@ -47,18 +47,18 @@ class Flip(pyco.LinOp):
 
         super().__init__(shape=(dim, dim))
 
-    @pycrt.enforce_precision(i="arr")
-    def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
+    @pxrt.enforce_precision(i="arr")
+    def apply(self, arr: pxt.NDArray) -> pxt.NDArray:
         sh = arr.shape[:-1]
         arr = arr.reshape(*sh, *self.arg_shape)
         out = arr.copy()
-        xp = pycu.get_array_module(arr)
+        xp = pxu.get_array_module(arr)
         for ax in self.axis:
             out = xp.flip(out, axis=len(sh) + ax)
 
         out = out.reshape(*sh, self.codim)
         return out
 
-    @pycrt.enforce_precision(i="arr")
-    def adjoint(self, arr: pyct.NDArray) -> pyct.NDArray:
+    @pxrt.enforce_precision(i="arr")
+    def adjoint(self, arr: pxt.NDArray) -> pxt.NDArray:
         return self.apply(arr)

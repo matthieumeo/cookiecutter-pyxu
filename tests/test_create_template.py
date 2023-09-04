@@ -35,21 +35,21 @@ def test_run_cookiecutter_and_plugin_tests(cookies, capsys):
     run_tox(str(result.project))
 
 
-def test_run_cookiecutter_and_plugin_tests_with_pycsou_prefix(cookies, capsys):
-    """make sure it's also ok to use pycsou prefix."""
-    result = cookies.bake(extra_context={"plugin_name": "pycsou-foo"})
+def test_run_cookiecutter_and_plugin_tests_with_pyxu_prefix(cookies, capsys):
+    """make sure it's also ok to use pyxu prefix."""
+    result = cookies.bake(extra_context={"plugin_name": "pyxu-foo"})
 
     assert result.exit_code == 0
     assert result.exception is None
-    assert result.project.basename == "pycsou-foo"
+    assert result.project.basename == "pyxu-foo"
     assert result.project.isdir()
     assert result.project.join("src").isdir()
-    assert result.project.join("src", "pycsou", "__init__.py").isfile()
-    assert result.project.join("src", "pycsou", "_tests", "test_reader.py").isfile()
+    assert result.project.join("src", "pyxu", "__init__.py").isfile()
+    assert result.project.join("src", "pyxu", "_tests", "test_reader.py").isfile()
 
 
 def test_run_cookiecutter_select_plugins(cookies, capsys):
-    """make sure it's also ok to use pycsou prefix."""
+    """make sure it's also ok to use pyxu prefix."""
     result = cookies.bake(
         extra_context={
             "plugin_name": "anything",

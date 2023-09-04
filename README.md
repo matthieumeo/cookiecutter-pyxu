@@ -1,6 +1,6 @@
-# cookiecutter-pycsou-plugin
+# cookiecutter-pyxu-plugin
 
-[Cookiecutter] template for authoring [pycsou] plugins.
+[Cookiecutter] template for authoring [pyxu] plugins.
 
 **NOTE: This repo is not meant to be cloned/forked directly! Please read "Getting Started" below**
 
@@ -8,32 +8,32 @@
 
 ### Create your plugin package
 
-Install [Cookiecutter] and generate a new Pycsou plugin project:
+Install [Cookiecutter] and generate a new Pyxu plugin project:
 
 ```bash
 pip install cookiecutter
-cookiecutter https://github.com/matthieumeo/cookiecutter-pycsou-plugin
+cookiecutter https://github.com/matthieumeo/cookiecutter-pyxu-plugin
 ```
 
 Cookiecutter prompts you for information regarding your plugin
 (A new folder will be created in your current working directory):
 
 ```bash
-full_name [Pycsou Developer]: Isaac Newton
+full_name [Pyxu Developer]: Isaac Newton
 email [yourname@example.com]: inewton@trinity.uk
 github_username_or_organization [githubuser]: sirisaac
-# NOTE: for packages whose primary purpose is to be a Pycsou plugin, we
-# recommend using the 'pycsou-' prefix in the package name.
-# If your package provides functionality outside of Pycsou, you may
-# choose to leave Pycsou out of the name.
-plugin_name [pycsou-foobar]: pycsou-gradient-descent
+# NOTE: for packages whose primary purpose is to be a Pyxu plugin, we
+# recommend using the 'pyxu-' prefix in the package name.
+# If your package provides functionality outside of Pyxu, you may
+# choose to leave Pyxu out of the name.
+plugin_name [pyxu-foobar]: pyxu-gradient-descent
 Select github_repository_url:
-1 - https://github.com/sirisaac/pycsou-gradient-descent
+1 - https://github.com/sirisaac/pyxu-gradient-descent
 2 - provide later
 Choose from 1, 2 [1]:
-module_name [pycsou_gradient_descent]:
-display_name [Pycsou FooBar Collection]: Gradient Descent
-short_description [A simple plugin to use the FooBar collection within Pycsou]: A simple gradient descent solver for Pycsou 
+module_name [pyxu_gradient_descent]:
+display_name [Pyxu FooBar Collection]: Gradient Descent
+short_description [A simple plugin to use the FooBar collection within Pyxu]: A simple gradient descent solver for Pyxu 
 # you can select from various plugin template examples
 include_math_plugin [y]: n
 include_operator_plugin [n]: 
@@ -53,13 +53,13 @@ Choose from 1, 2, 3, 4, 5, 6 [1]:
 
 ```
 
-You just created a minimal Pycsou plugin, complete with tests
+You just created a minimal Pyxu plugin, complete with tests
 and ready for automatic deployment!
 
 For more detailed information on each prompt see the [prompts reference](./PROMPTS.md).
 
 ```no-highlight
-pycsou-gradient-descent/
+pyxu-gradient-descent/
 ├── .git
 ├── .github
 │         └── workflows
@@ -69,7 +69,7 @@ pycsou-gradient-descent/
 ├── LICENSE
 ├── MANIFEST.in
 ├── .pre-commit-config.yaml
-├── .pycsou-fair
+├── .pyxu-fair
 │         ├── config.yml
 │         └── DESCRIPTION.md
 ├── pyproject.toml
@@ -77,13 +77,13 @@ pycsou-gradient-descent/
 ├── setup.cfg
 ├── src
 │         ├── __init__.py
-│         ├── pycsou_gradient_descent
+│         ├── pyxu_gradient_descent
 │         │       ├── __init__.py
 │         │       └── opt
 │         │           ├── __init__.py
 │         │           └── solver
 │         │               └── __init__.py
-│         └── pycsou_gradient_descent_tests
+│         └── pyxu_gradient_descent_tests
 │             ├── __init__.py
 │             └── test_opt
 │                 ├── __init__.py
@@ -100,7 +100,7 @@ the version of your package is managed using git tags,
 [see below](#automatic-deployment-and-version-management))
 
 ```bash
-cd pycsou-gradient-descent
+cd pyxu-gradient-descent
 git init
 git add .
 git commit -m 'initial commit'
@@ -116,7 +116,7 @@ git commit -m 'initial commit'
    # here, continuing with the example above...
    # but replace with your own username and repo name
 
-   git remote add origin https://github.com/sirisaac/pycsou-gradient-descent.git
+   git remote add origin https://github.com/sirisaac/pyxu-gradient-descent.git
    git push -u origin main
    ```
    
@@ -130,7 +130,7 @@ It is recommended to set up a local Python environment to develop and test your 
    python -m pip install -e .
 
    ```
-You will probably want to install your new package into this environment. ``Pycsou`` is already set as a dependency,
+You will probably want to install your new package into this environment. ``Pyxu`` is already set as a dependency,
 simply add the other required dependencies in the ``setup.cfg`` file and run the following commands.
    ```bash
    cd <your-repo-name>
@@ -139,18 +139,18 @@ simply add the other required dependencies in the ``setup.cfg`` file and run the
 
 ## Develop new features
 
-The cookiecutter offers a predefined hierarchy of classes and functions to aid novice Pycsou developers in creating 
-novel features. At this point, the developer can create new functionalities following the [pycsou_dev_notes] and 
+The cookiecutter offers a predefined hierarchy of classes and functions to aid novice Pyxu developers in creating 
+novel features. At this point, the developer can create new functionalities following the [pyxu_dev_notes] and 
 structure predefined by the cookiecutter.
 
 ## Continuous Integration
 
-This Pycsou-plugin generator repository provides you with already-parametrized continuous integration tools.
+This Pyxu-plugin generator repository provides you with already-parametrized continuous integration tools.
 
 ### Pre-commit
 
 This template includes a default yaml configuration for [pre-commit](https://pre-commit.com/).
-Among other things, it includes checks for best practices in Pycsou plugins.
+Among other things, it includes checks for best practices in Pyxu plugins.
 You may edit the config at `.pre-commit-config.yaml`
 
 To use it run:
@@ -235,7 +235,7 @@ and available for pip install with:
 
 ```bash
 # for example
-pip install pycsou-gradient-descent
+pip install pyxu-gradient-descent
 ```
 
 ### Create your documentation
@@ -262,8 +262,8 @@ documentation generation tools:
 
 ## Resources
 
-Please consult the [pycsou plugin
-docs](https://pycsou.org/stable/plugins/index.html) for more information on
+Please consult the [pyxu plugin
+docs](https://pyxu-org.github.io/fair/contribute.html) for more information on
 how to create a plugin.
 
 Details on why this plugin template is using the `src` layout can be found [here](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure) and [here](https://hynek.me/articles/testing-packaging/)
@@ -275,22 +275,22 @@ issue] along with a detailed description.
 
 ## License
 
-Distributed under the terms of the [BSD-3] license, `cookiecutter-pycsou-plugin`
+Distributed under the terms of the [BSD-3] license, `cookiecutter-pyxu-plugin`
 is free and open source software.
 
-[pycsou organization]: https://github.com/matthieumeo/pycsou/
+[pyxu organization]: https://github.com/matthieumeo/pyxu/
 [gitter_badge]: https://badges.gitter.im/Join%20Chat.svg
-[gitter]: https://gitter.im/pycsou/cookiecutter-pycsou-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge "Join Chat on Gitter.im"
-[travis_badge]: https://travis-ci.org/pycsou/cookiecutter-pycsou-plugin.svg?branch=main
-[travis]: https://travis-ci.org/pycsou/cookiecutter-pycsou-plugin "See Build Status on Travis CI"
-[docs_badge]: https://readthedocs.org/projects/cookiecutter-pycsou-plugin/badge/?version=latest
-[documentation]: https://cookiecutter-pycsou-plugin.readthedocs.io/en/latest/ "Documentation"
+[gitter]: https://gitter.im/pyxu/cookiecutter-pyxu-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge "Join Chat on Gitter.im"
+[travis_badge]: https://travis-ci.org/pyxu/cookiecutter-pyxu-plugin.svg?branch=main
+[travis]: https://travis-ci.org/pyxu/cookiecutter-pyxu-plugin "See Build Status on Travis CI"
+[docs_badge]: https://readthedocs.org/projects/cookiecutter-pyxu-plugin/badge/?version=latest
+[documentation]: https://cookiecutter-pyxu-plugin.readthedocs.io/en/latest/ "Documentation"
 [cookiecutter]: https://github.com/audreyr/cookiecutter
-[pycsou]: https://github.com/matthieumeo/pycsou
-[pycsou_dev_notes]: https://github.com/matthieumeo/pycsou/blob/v2-dev/doc/dev_notes.rst
+[pyxu]: https://github.com/matthieumeo/pyxu
+[pyxu_dev_notes]: https://github.com/matthieumeo/pyxu/blob/v2-dev/doc/dev_notes.rst
 [pypi]: https://pypi.org/
 [tox]: https://tox.readthedocs.io/en/latest/
-[file an issue]: https://github.com/pycsou/cookiecutter-pycsou-plugin/issues
+[file an issue]: https://github.com/pyxu/cookiecutter-pyxu-plugin/issues
 [sphinx]: https://www.sphinx-doc.org/en/master/usage/quickstart.html
 [mkdocs]: https://www.mkdocs.org/getting-started/
 [jupyterbook]: https://jupyterbook.org/en/stable/start/your-first-book.html
