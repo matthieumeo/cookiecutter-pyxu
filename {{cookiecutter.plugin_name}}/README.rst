@@ -13,9 +13,9 @@
 .. image:: https://codecov.io/gh/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}/branch/main/graph/badge.svg
    :target: https://codecov.io/gh/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}
    :alt: codecov
-.. image:: https://img.shields.io/endpoint?url=https://api.pyxu-fair.org/shields/{{cookiecutter.plugin_name}}
-   :target: file:///home/joan/Documents/git/pyxu/build/html/fair/plugins/{{cookiecutter.plugin_name}}.html
-   :alt: pyxu fair
+.. image:: https://img.shields.io/endpoint?url=https://pyxu-org.github.io/fair/shields/{{cookiecutter.plugin_name}}
+   :alt: Pyxu score
+   :target: https://pyxu-org.github.io/fair/score.html
 
 {{cookiecutter.short_description}}
 {{ '-' * (cookiecutter.short_description | length) }}
