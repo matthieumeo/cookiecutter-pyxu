@@ -8,7 +8,6 @@ except ImportError:
 {% else -%}
 __version__ = "0.0.1"
 {% endif -%}
-
 {% if cookiecutter.include_math_plugin == 'y' %}
 from .math import eigh
 {% endif %}{% if cookiecutter.include_operator_plugin == 'y' %}

@@ -22,7 +22,7 @@
 
 This `Pyxu`_ plugin was generated with `Cookiecutter`_ using the `cookiecutter-pyxu`_ template.
 
-.. note:: Don't miss the `contributing-guide`_ to set up your new package and to review the Pyxu `developer notes`_.
+.. Don't miss the `contributing-guide`_ to set up your new package and to review the Pyxu `developer notes`_.
 
 Installation
 ------------
