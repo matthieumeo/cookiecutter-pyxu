@@ -20,13 +20,9 @@
 {{cookiecutter.short_description}}
 {{ '-' * (cookiecutter.short_description | length) }}
 
-This `pyxu`_ plugin was generated with `Cookiecutter`_ using `pyxu`_'s `cookiecutter-pyxu`_ template.
+This `Pyxu`_ plugin was generated with `Cookiecutter`_ using the `cookiecutter-pyxu`_ template.
 
-.. comment::
-   Don't miss the full getting started guide to set up your new package:
-   https://pyxu-org.github.io/fair/contribute.html
-   and review the Pyxu developer notes:
-   https://pyxu-org.github.io/fair/dev_notes.html
+.. note:: Don't miss the `contributing-guide`_ to set up your new package and to review the Pyxu `developer notes`_.
 
 Installation
 ------------
@@ -62,7 +58,9 @@ Issues
 
 If you encounter any problems, please `file an issue`_ along with a detailed description.
 
-.. _pyxu: https://github.com/matthieumeo/pyxu
+.. _Pyxu: https://github.com/matthieumeo/pyxu
+.. _contributing-guide: https://pyxu-org.github.io/fair/contribute.html
+.. _developer notes: https://pyxu-org.github.io/fair/dev_notes.html
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _MIT: http://opensource.org/licenses/MIT
 .. _BSD-3: http://opensource.org/licenses/BSD-3-Clause
