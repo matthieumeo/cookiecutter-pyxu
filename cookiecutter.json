@@ -13,7 +13,7 @@
     "include_stop_plugin": "y",
     "include_contrib_plugin": "y",
     "use_git_tags_for_versioning": "n",
-    "install_precommit": "n",
+    "install_precommit": "y",
     "license": [
         "MIT",
         "BSD-3",
