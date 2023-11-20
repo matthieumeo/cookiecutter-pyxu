@@ -2,51 +2,61 @@ import itertools
 import warnings
 
 import pyxu.abc as pxa
-import pyxu.operator.func as pxof
-import pyxu.runtime as pxrt
-import pyxu.util as pxu
 import pyxu.info.ptype as pxt
 import pyxu.info.warning as pxuw
+import pyxu.runtime as pxrt
+import pyxu.util as pxu
 
 __all__ = [
     "GradientDescent",
 ]
 
 
-class GradientDescent(pxa.Solver):
+class GradientDescent(pxa.solver.Solver):
     r"""
     Gradient Descent (GD) solver.
 
-    GradientDescent solves minimization problems of the form
+    GD solves minimization problems of the form:
 
     .. math::
 
-       {\min_{\mathbf{x}\in\mathbb{R}^N} \;\mathcal{F}(\mathbf{x}),
+       {\min_{\mathbf{x}\in\mathbb{R}^N} \;\mathcal{F}(\mathbf{x})},
 
     where:
 
     * :math:`\mathcal{F}:\mathbb{R}^N\rightarrow \mathbb{R}` is *convex* and *differentiable*, with
       :math:`\beta`-*Lipschitz continuous* gradient, for some :math:`\beta\in[0,+\infty[`.
 
-    **Remark 1:**
-    The convergence is guaranteed for step sizes :math:`\tau\leq 1/\beta`.
+    Remarks
+    -------
 
-    **Remark 2:**
-    GradientDescent achieves the following (optimal) *convergence rate* with the implemented acceleration scheme
-    from Nesterov [Nesterov]_.
+    * The convergence is guaranteed for step sizes :math:`\tau\leq 1/\beta`.
+
+
+    * `GradientDescent` achieves the following (optimal) *convergence rate* with the implemented acceleration scheme from Nesterov [Nesterov]_.
 
     .. math::
 
-       \mathcal{F}(\mathbf{x}_{k}) - \mathcal{F}^{*} \leq O\bigl(\frac{\Vert x_{0} - x^{*}\Vert}^{2}_{2}{\tau k^2}\bigr)
+       \mathcal{F}(\mathbf{x}_{k}) - \mathcal{F}^{*} \leq O\left(\frac{\Vert x_{0} - x^{*}\Vert^{2}_{2}}{\tau k^2}\right)
 
 
-    **Remark 3:**
-    The relative norm change of the primal variable is used as the default stopping criterion.
-    By default, the algorithm stops when the norm of the difference between two consecutive GradientDescent
-    iterates :math:`\{\mathbf{x}_n\}_{n\in\mathbb{N}}` is smaller than 1e-4.
-    Different stopping criteria can be used. (see :py:mod:`~pyxu.opt.solver.stop`.)
+    * The relative norm change of the primal variable is used as the default stopping criterion.
+        By default, the algorithm stops when the norm of the difference between two consecutive GradientDescent
+        iterates :math:`\{\mathbf{x}_n\}_{n\in\mathbb{N}}` is smaller than 1e-4.
+        Different stopping criteria can be used. (see :py:mod:`pyxu.opt.stop`.)
 
-    ``GradientDescent.fit()`` **Parameterization**
+
+    Parameters (``__init__()``)
+    ---------------------------
+    * **f** (:py:class:`pyxu.abc.DiffFunc`)
+      --
+      Differentiable function :math:`\mathcal{F}`.
+    * **\*\*kwargs** (:py:class:`~collections.abc.Mapping`)
+      --
+      Other keyword parameters passed on to :py:meth:`pyxu.abc.Solver.__init__`.
+
+    Parameters (``fit()``)
+    ----------------------
 
     x0: pxt.NDArray
         (..., N) initial point(s).
@@ -56,16 +66,11 @@ class GradientDescent(pxa.Solver):
     acceleration: bool
         If True (default), then use Nesterov acceleration scheme.
 
-    References
-    ----------
-    .. [1] [Nesterov] Nesterov, Yurii Evgen'evich.
-           "A method of solving a convex programming problem with convergence rate O\bigl(k^2\bigr)."
-           Doklady Akademii Nauk. Vol. 269. No. 3. Russian Academy of Sciences, 1983.
     """
 
     def __init__(
         self,
-        f: pxa.DiffFunc = None,
+        f: pxa.operator.DiffFunc,
         **kwargs,
     ):
         kwargs.update(
@@ -73,7 +78,7 @@ class GradientDescent(pxa.Solver):
         )
         super().__init__(**kwargs)
 
-        if (f is None):
+        if f is None:
             msg = " ".join(
                 [
                     "Cannot minimize always-0 functional.",
@@ -93,9 +98,6 @@ class GradientDescent(pxa.Solver):
     ):
         mst = self._mstate  # shorthand
         mst["x"] = mst["x_prev"] = x0
-
-        if self._f is None:
-            self._f = pxof.NullFunc(dim=x0.shape[-1])
 
         if tau is None:
             try:

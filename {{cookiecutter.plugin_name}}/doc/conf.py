@@ -154,6 +154,7 @@ html_css_files = ["css/custom.css"]
 ## EXTENSION CONFIGURATION ===================================================
 extensions = [
     "matplotlib.sphinxext.plot_directive",
+    "nbsphinx",
     "sphinx_codeautolink",
     "sphinx_copybutton",
     "sphinx_design",
@@ -171,6 +172,11 @@ extensions = [
 plot_include_source = True
 plot_html_show_source_link = True
 # plot_formats = [("png", 90)]
+
+# -- Options for nbsphinx extension ------------------------------------------
+# If the notebooks take a long time to run, pre-run them and save the outputs. The following line tells nbsphinx not to
+# re-run them during the build process.
+nbsphinx_execute = "never"
 
 # -- Options for codeautolink extension --------------------------------------
 codeautolink_autodoc_inject = False
@@ -223,6 +229,7 @@ intersphinx_mapping = {  # We only include most useful doc-sets.
     "Matplotlib [stable]": ("https://matplotlib.org/stable/", None),
     "JAX [latest]": ("https://jax.readthedocs.io/en/latest/", None),
     "PyTorch [stable]": ("https://pytorch.org/docs/stable/", None),
+    "Pyxu [stable]": ("https://pyxu-org.github.io/", None),
 }
 
 # -- Options for mathjax extension -------------------------------------------
