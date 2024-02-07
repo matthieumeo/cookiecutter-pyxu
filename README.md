@@ -12,7 +12,7 @@ Install [Cookiecutter] and generate a new Pyxu plugin project:
 
 ```bash
 pip install cookiecutter
-cookiecutter https://github.com/matthieumeo/cookiecutter-pyxu
+cookiecutter https://github.com/pyxu-org/cookiecutter-pyxu
 ```
 
 Cookiecutter prompts you for information regarding your plugin
