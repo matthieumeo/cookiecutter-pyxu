@@ -1,0 +1,96 @@
+[build-system]
+requires = [
+    "hatchling",
+    "hatch-vcs",
+]
+build-backend = "hatchling.build"
+
+# Metadata ====================================================================
+[project]
+name = "{{cookiecutter.module_name}}"
+dynamic = ["version"]
+description = "{{cookiecutter.short_description}}"
+readme = "README.rst"
+requires-python = ">= 3.10, < 3.13"
+{% if cookiecutter.license == "MIT" -%}
+license = "MIT"
+{%- elif cookiecutter.license == "BSD-3" -%}
+license = "BSD-3-Clause"
+{%- elif cookiecutter.license == "GNU GPL v3.0" -%}
+license = "GPL-3.0-only"
+{%- elif cookiecutter.license == "GNU LGPL v3.0" -%}
+license = "LGPL-3.0-only"
+{%- elif cookiecutter.license == "Apache Software License 2.0" -%}
+license = "Apache-2.0"
+{%- elif cookiecutter.license == "Mozilla Public License 2.0" -%}
+license = "MPL-2.0"
+{%- endif %}
+authors = [
+    { name = "{{cookiecutter.full_name}}", email = "{{cookiecutter.email}}" },
+]
+classifiers = [
+    "Framework :: Pycsou",
+    "Topic :: Scientific/Engineering",
+    "Intended Audience :: Science/Research",
+    "Development Status :: 4 - Beta",
+    {% if cookiecutter.license == "MIT" -%}
+    "License :: OSI Approved :: MIT License",
+    {%- elif cookiecutter.license == "BSD-3" -%}
+    "License :: OSI Approved :: BSD License",
+    {%- elif cookiecutter.license == "GNU GPL v3.0" -%}
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    {%- elif cookiecutter.license == "GNU LGPL v3.0" -%}
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    {%- elif cookiecutter.license == "Apache Software License 2.0" -%}
+    "License :: OSI Approved :: Apache Software License",
+    {%- elif cookiecutter.license == "Mozilla Public License 2.0" -%}
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    {%- endif %}
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+urls.download = "https://github.com/{{cookiecutter.github_repository_url}}"
+dependencies = [
+    # "pyxu >= 2.0, < 3",
+    "pyxu",
+]
+
+# entry_points; Note the `_` underscore to overload a base Pyxu class.
+{% if cookiecutter.include_math_plugin == 'y' -%}
+[project.entry-points."pyxu.math"]
+eigh = "{{cookiecutter.module_name}}:eigh"
+{% endif %}{% if cookiecutter.include_operator_plugin == 'y' -%}
+[project.entry-points."pyxu.operator"]
+Flip = "{{cookiecutter.module_name}}:Flip"
+_NullFunc = "{{cookiecutter.module_name}}:NullFunc"
+{% endif %}{% if cookiecutter.include_solver_plugin == 'y' -%}
+[project.entry-points."pyxu.opt.solver"]
+GradientDescent = "{{cookiecutter.module_name}}:GradientDescent"
+{% endif %}{% if cookiecutter.include_stop_plugin == 'y' -%}
+[project.entry-points."pyxu.opt.stop"]
+Deadline = "{{cookiecutter.module_name}}:Deadline"
+{% endif %}
+
+# Optional dependencies =======================================================
+[project.optional-dependencies]
+dev = [ "pyxu[dev]", ]
+
+# Get version info from Git ===================================================
+[tool.hatch.version]
+source = "vcs"
+
+# sdist/wheel config ==========================================================
+[tool.hatch.build]
+exclude = [
+    "/dev",
+    "/doc",
+    "/src/{{cookiecutter.module_name}}_tests",
+]
+include = [
+    "/src",
+]
+packages = [
+    "src/{{cookiecutter.module_name}}",
+]

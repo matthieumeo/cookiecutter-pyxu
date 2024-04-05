@@ -74,7 +74,6 @@ pyxu-gradient-descent/
 │         └── DESCRIPTION.md
 ├── pyproject.toml
 ├── README.md
-├── setup.cfg
 ├── src
 │         ├── __init__.py
 │         ├── pyxu_gradient_descent

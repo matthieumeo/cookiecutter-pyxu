@@ -115,7 +115,6 @@ Your plugin template is ready!  Next steps:
 
 {% if cookiecutter.install_precommit == 'y' %}
     # try to install and update pre-commit
-    # installing after commit to avoid problem with comments in setup.cfg.
     try:
         print("install pre-commit hook...")
         subprocess.run(["pre-commit", "install"])
@@ -133,15 +132,7 @@ Your plugin template is ready!  Next steps:
      git remote add origin https://github.com/{{ cookiecutter.github_username_or_organization }}/{{ cookiecutter.plugin_name }}.git
      git push -u origin main
 
-4. The following default URLs have been added to `setup.cfg`:
-
-    Bug Tracker = https://github.com/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}/issues
-    Documentation = https://github.com/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}#README.md
-    Source Code = https://github.com/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}
-    User Support = https://github.com/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}/issues
-
-    These URLs will be displayed on your plugin's Pyxu-FAIR page.
-    You may wish to change these before publishing your plugin!"""
+    """
 
 {% else %}
     msg += """
@@ -152,21 +143,7 @@ Your plugin template is ready!  Next steps:
 
      git remote add origin https://github.com/your-repo-username/your-repo-name.git
      git push -u origin main
-
-   Don't forget to add this url to setup.cfg!
-
-     [metadata]
-     url = https://github.com/your-repo-username/your-repo-name.git
-
-4. Consider adding additional links for documentation and user support to setup.cfg
-   using the project_urls key e.g.
-
-    [metadata]
-    project_urls =
-        Bug Tracker = https://github.com/your-repo-username/your-repo-name/issues
-        Documentation = https://github.com/your-repo-username/your-repo-name#README.md
-        Source Code = https://github.com/your-repo-username/your-repo-name
-        User Support = https://github.com/your-repo-username/your-repo-name/issues"""
+"""
 {% endif %}
     msg += """
 5. Read the README for more info: https://github.com/matthieumeo/cookiecutter-pyxu
