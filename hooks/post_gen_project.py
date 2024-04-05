@@ -146,9 +146,9 @@ Your plugin template is ready!  Next steps:
 """
 {% endif %}
     msg += """
-5. Read the README for more info: https://github.com/matthieumeo/cookiecutter-pyxu
+4. Read the README for more info: https://github.com/pyxu-org/cookiecutter-pyxu
 
-6. We've provided a template description for your plugin page at `.pyxu-fair/DESCRIPTION.md`.
+5. We've provided a template description for your plugin page at `.pyxu-fair/DESCRIPTION.md`.
    You'll likely want to edit this before you publish your plugin to the Pyxu-FAIR (https://pyxu-org.github.io/fair/index.html).
 """
 

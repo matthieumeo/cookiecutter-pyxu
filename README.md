@@ -265,15 +265,15 @@ issue] along with a detailed description.
 Distributed under the terms of the [BSD-3] license, `cookiecutter-pyxu`
 is free and open source software.
 
-[pyxu organization]: https://github.com/matthieumeo/pyxu/
+[pyxu organization]: https://github.com/pyxu-org/
 [documentation]: https://pyxu-org.github.io/fair/contribute.html "Documentation"
 [cookiecutter]: https://github.com/audreyr/cookiecutter
-[pyxu]: https://github.com/matthieumeo/pyxu
+[pyxu]: https://github.com/pyxu-org/pyxu
 [pyxu_dev_notes]: https://pyxu-org.github.io/fair/dev_notes.html
 [pypi]: https://pypi.org/
 [tox]: https://tox.readthedocs.io/en/latest/
 [pytest]: https://docs.pytest.org/en/7.1.x/
-[file an issue]: https://github.com/pyxu/cookiecutter-pyxu/issues
+[file an issue]: https://github.com/pyxu-org/cookiecutter-pyxu/issues
 [sphinx]: https://www.sphinx-doc.org/en/master/usage/quickstart.html
 [Pydata-Sphinx-Theme]: https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html
 [mit]: http://opensource.org/licenses/MIT
