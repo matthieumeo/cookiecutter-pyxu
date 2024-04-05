@@ -12,7 +12,6 @@
     "include_solver_plugin": "y",
     "include_stop_plugin": "y",
     "include_contrib_plugin": "y",
-    "use_git_tags_for_versioning": "n",
     "install_precommit": "y",
     "license": [
         "MIT",

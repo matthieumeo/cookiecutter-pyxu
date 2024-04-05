@@ -40,7 +40,6 @@ include_operator_plugin [n]:
 include_solver_plugin [n]:y
 include_stop_plugin [n]: n
 include_contrib_plugin [n]: n
-use_git_tags_for_versioning [n]:
 install_precommit [n]: 
 Select license:
 1 - BSD-3
@@ -61,9 +60,6 @@ For more detailed information on each prompt see the [prompts reference](./PROMP
 ```no-highlight
 pyxu-gradient-descent/
 ├── .git
-├── .github
-│         └── workflows
-│             └── test_and_deploy.yml
 ├── .gitignore
 ├── __init__.py
 ├── LICENSE
