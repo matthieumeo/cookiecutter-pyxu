@@ -78,6 +78,7 @@ inside your plugin's module in the file `_operator.py`. You can then edit the co
 file to write your mathematical operator. For more information on Linear operators see the
 [specification reference][reader-spec].
 
+## install_precommit
 
 This will install [pre-commit](https://pre-commit.com) for you. 
 
