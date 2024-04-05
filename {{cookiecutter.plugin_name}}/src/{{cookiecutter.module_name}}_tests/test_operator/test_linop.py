@@ -25,7 +25,7 @@ def width(request):
 
 @pytest.fixture(
     params=[
-        # arg_shape, #axis
+        # dim_shape, #axis
         ((2,), 0),
         ((2,), -1),
         ((2,3,4), 0),
@@ -39,7 +39,7 @@ def params(request):
 
 
 @pytest.fixture
-def arg_shape(params):
+def dim_shape(params):
     return params[0]
 
 
@@ -59,20 +59,19 @@ def seed(request):
 
 
 @pytest.fixture
-def data(arg_shape, batch_shape, seed, ndi, width, axis):
+def data(dim_shape, batch_shape, seed, ndi, axis):
     # Make a batch of real & symmetric input matrices (PSD)
     rng = np.random.default_rng(seed=seed)
-    input_shape = batch_shape + arg_shape
+    input_shape = batch_shape + dim_shape
     x = rng.normal(size=input_shape)
 
     xp = ndi.module()
-    axis = (len(arg_shape) - 1) if axis == -1 else axis
+    axis = (len(dim_shape) - 1) if axis == -1 else axis
     axis += len(batch_shape)
-    return {"in_": xp.array(x.reshape(*batch_shape, -1)), "out_gt":  np.flip(x, axis=axis)}
+    return {"in_": xp.array(x), "out_gt":  np.flip(x, axis=axis)}
 
 
-def test_linop(data, axis, arg_shape, batch_shape, ndi):
-    input_shape = batch_shape + arg_shape
-    flip = Flip(arg_shape=arg_shape, axis=axis)
-    out = flip(data["in_"]).reshape(*input_shape)
+def test_linop(data, axis, dim_shape):
+    flip = Flip(dim_shape=dim_shape, axis=axis)
+    out = flip(data["in_"])
     assert np.allclose(out, data["out_gt"] )

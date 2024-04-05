@@ -41,7 +41,7 @@ def params(request):
 
 
 @pytest.fixture
-def arg_shape(params):
+def dim_shape(params):
     return params[0], params[0]
 
 
@@ -61,16 +61,16 @@ def seed(request):
 
 
 @pytest.fixture
-def data(arg_shape, batch_shape, seed, ndi, width, scheme):
+def data(dim_shape, batch_shape, seed, ndi, scheme):
     # Make a batch of real & symmetric input matrices (PSD)
-    rng = np.random.default_rng(seed=0)
-    input_shape = batch_shape + arg_shape
+    rng = np.random.default_rng(seed=seed)
+    input_shape = batch_shape + dim_shape
     if scheme == "FULL":
         x = rng.normal(size=input_shape)
         x += x.swapaxes(2, 3)
     elif scheme == "DIAG":
         x = rng.normal(size=input_shape)
-        mask = np.tile((np.eye(arg_shape[0])), [*batch_shape, 1, 1])
+        mask = np.tile((np.eye(dim_shape[0])), [*batch_shape, 1, 1])
         x *= mask
 
     w_np, v_np = np.linalg.eigh(x)
@@ -78,16 +78,13 @@ def data(arg_shape, batch_shape, seed, ndi, width, scheme):
         v_np = mask
 
     xp = ndi.module()
-    x = x.reshape(*batch_shape, -1)
-    w_np = w_np.reshape(*batch_shape, -1)
-    v_np = v_np.reshape(*batch_shape, -1)
     return {"in_": xp.array(x), "out_gt": (xp.array(w_np), xp.array(v_np))}
 
 
-def test_math(data, arg_shape, ndi):
+def test_math(data, dim_shape, ndi):
     x = data["in_"]
     w_np, v_np = data["out_gt"]
-    w, v = eigh(x, arg_shape=arg_shape)
+    w, v = eigh(x, dim_shape=dim_shape)
     xp = ndi.module()
     assert allclose(v, v_np, xp, False)
     assert allclose(w, w_np, xp)

@@ -11,7 +11,7 @@ __all__ = ["Flip"]
 
 class Flip(pxo.LinOp):
 
-    def __init__(self, arg_shape: pxt.NDArrayShape, axis: pxt.NDArrayAxis = None) -> pxt.OpT:
+    def __init__(self, dim_shape: pxt.NDArrayShape, axis: pxt.NDArrayAxis = None) -> pxt.OpT:
         r"""
         Reverse the order of elements in an array along the given axis.
 
@@ -19,7 +19,7 @@ class Flip(pxo.LinOp):
 
         Parameters
         ----------
-        arg_shape: pxt.NDArrayShape
+        dim_shape: pxt.NDArrayShape
             Shape of the data to be flipped.
         axis: pxt.NDArrayAxis
             Axis or axes along which the input array is flipped.
@@ -34,10 +34,10 @@ class Flip(pxo.LinOp):
                 obj = [obj]
             return np.array(obj, dtype=int)
 
-        self.arg_shape = as_array(arg_shape)
-        assert np.all(self.arg_shape > 0)
-        dim = np.prod(self.arg_shape).item()
-        N_dim = len(self.arg_shape)
+        self.dim_shape = as_array(dim_shape)
+        assert np.all(self.dim_shape > 0)
+        dim = np.prod(self.dim_shape).item()
+        N_dim = len(self.dim_shape)
 
         if axis is None:
             axis = np.arange(N_dim)
@@ -49,14 +49,11 @@ class Flip(pxo.LinOp):
 
     @pxrt.enforce_precision(i="arr")
     def apply(self, arr: pxt.NDArray) -> pxt.NDArray:
-        sh = arr.shape[:-1]
-        arr = arr.reshape(*sh, *self.arg_shape)
+        sh = arr.shape[:-self.dim_rank]
         out = arr.copy()
         xp = pxu.get_array_module(arr)
         for ax in self.axis:
             out = xp.flip(out, axis=len(sh) + ax)
-
-        out = out.reshape(*sh, self.codim)
         return out
 
     @pxrt.enforce_precision(i="arr")

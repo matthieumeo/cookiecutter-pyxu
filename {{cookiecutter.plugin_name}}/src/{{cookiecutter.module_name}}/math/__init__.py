@@ -7,7 +7,7 @@ import pyxu.util as pxu
 __all__ = ["eigh"]
 
 
-def eigh(arr: pxt.NDArray, arg_shape: pxt.NDArrayShape, normalize=True):
+def eigh(arr: pxt.NDArray, dim_shape: pxt.NDArrayShape, normalize=True):
     r"""
     Batch computation of the eigenvalues and eigenvectors of a batch (:math:`\mathcal{N}`-shaped, where
     :math:`\mathcal{N} = (N_{1}, \cdots, N_{k})`) of complex Hermitian (conjugate symmetric) or a real symmetric
@@ -25,7 +25,7 @@ def eigh(arr: pxt.NDArray, arg_shape: pxt.NDArrayShape, normalize=True):
     Parameters
     ----------
     arr: (…, M, M) pxt.NDArray
-    arg_shape: pxt.NDArrayShape
+    dim_shape: pxt.NDArrayShape
     normalize: bool
 
     Returns
@@ -35,7 +35,7 @@ def eigh(arr: pxt.NDArray, arg_shape: pxt.NDArrayShape, normalize=True):
     v: (…, M, M) pxt.NDArray
         The column v[..., i] is the normalized eigenvector corresponding to the eigenvalue w[..., i].
     """
-    assert len(np.unique(arg_shape))
+    assert len(np.unique(dim_shape))
     st_sh = arr.shape[:-1]
     st_size = np.prod(st_sh)
     N = pxd.NDArrayInfo
@@ -43,10 +43,10 @@ def eigh(arr: pxt.NDArray, arg_shape: pxt.NDArrayShape, normalize=True):
 
     if N.from_obj(arr) == N.DASK:
         chunksize = arr.chunksize
-        arr = arr.reshape(*st_sh, *arg_shape)
-        arr = arr.rechunk(chunks=(*((-1),) * len(st_sh), *((-1),) * len(arg_shape)))
+        arr = arr.reshape(*st_sh, *dim_shape)
+        arr = arr.rechunk(chunks=(*((-1),) * len(st_sh), *((-1),) * len(dim_shape)))
     else:
-        arr = arr.reshape(st_size, *arg_shape)
+        arr = arr.reshape(st_size, *dim_shape)
 
     w = xp.zeros_like(arr[..., 0])
     v = xp.zeros_like(arr)

@@ -16,7 +16,7 @@ def test_stop():
     deadline = Deadline(t=future_time)
     N = 10
     y = np.arange(N)
-    sl2 = SquaredL2Norm(dim=N).asloss(y)
+    sl2 = SquaredL2Norm(dim=N).argshift(-y)
     gd = GradientDescent(f=sl2)
     gd.fit(x0=np.random.randn(N), stop_crit=deadline)
     end_time = dt.datetime.now()
