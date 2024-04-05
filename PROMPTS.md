@@ -58,7 +58,13 @@ This will be the code repository link that is stored in the `url` field in
 
 Choose `provide later` at this prompt if the default generated url is incorrect,
 or if you do not wish to provide a url at all. You can then add this link to your
-`setup.cfg` later, under the `url` field.
+`pyproject.toml` later, under the `url` field.
+
+## module_name
+
+This is the name of the Python module where the code for your plugin will live. The default option is generated using the `plugin_name` and replacing any hyphens for underscores. A folder with this name is created inside the top level directory of your plugin, and populated with code templates.
+
+This module will also be added as the entry point to your plugin in `pyproject.toml`, which allowing Pyxu to discover your  plugin.
 
 ## display_name
 
@@ -73,10 +79,9 @@ this description will also be listed alongside your package name in search resul
 
 ## include_operator_plugin
 
-Choosing `"y"` for this prompt will create an example reader implementation
-inside your plugin's module in the file `_operator.py`. You can then edit the code in this
-file to write your mathematical operator. For more information on Linear operators see the
-[specification reference][reader-spec].
+Choosing `"y"` for this prompt will create two example operators (a linear operator and a functional)
+inside your plugin's module in the files `src/module_name/operator/func/__init__.py` and `src/module_name/operator/linop/__init__.py`. You can then edit the code in this
+file to write your mathematical operator. The functional example illustrates how to overload an existing class in the base Pyxu.
 
 ## install_precommit
 

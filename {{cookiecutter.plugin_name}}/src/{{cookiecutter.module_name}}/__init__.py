@@ -1,7 +1,7 @@
 import importlib.metadata
 
 try:
-    __version__ = importlib.metadata.version("pyxu_eigh")
+    __version__ = importlib.metadata.version("{{cookiecutter.module_name}}}")
 except ImportError:
     __version__ = "unknown"
 
