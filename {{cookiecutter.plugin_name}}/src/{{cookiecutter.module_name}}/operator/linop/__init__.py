@@ -1,13 +1,13 @@
 import collections.abc as cabc
 
 import numpy as np
-
 import pyxu.abc.operator as pxo
+import pyxu.info.ptype as pxt
 import pyxu.runtime as pxrt
 import pyxu.util as pxu
-import pyxu.info.ptype as pxt
 
 __all__ = ["Flip"]
+
 
 class Flip(pxo.LinOp):
 
@@ -34,10 +34,11 @@ class Flip(pxo.LinOp):
                 obj = [obj]
             return np.array(obj, dtype=int)
 
-        self.dim_shape = as_array(dim_shape)
-        assert np.all(self.dim_shape > 0)
-        dim = np.prod(self.dim_shape).item()
-        N_dim = len(self.dim_shape)
+        dim_shape = as_array(dim_shape)
+
+        super().__init__(dim_shape=dim_shape, codim_shape=dim_shape)
+
+        N_dim = self.dim_rank
 
         if axis is None:
             axis = np.arange(N_dim)
@@ -45,11 +46,9 @@ class Flip(pxo.LinOp):
         assert np.all((-N_dim <= axis) & (axis < N_dim))  # all axes in valid range
         self.axis = (axis + N_dim) % N_dim  # get rid of negative axes
 
-        super().__init__(shape=(dim, dim))
-
     @pxrt.enforce_precision(i="arr")
     def apply(self, arr: pxt.NDArray) -> pxt.NDArray:
-        sh = arr.shape[:-self.dim_rank]
+        sh = arr.shape[: -self.dim_rank]
         out = arr.copy()
         xp = pxu.get_array_module(arr)
         for ax in self.axis:

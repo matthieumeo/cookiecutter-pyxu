@@ -3,7 +3,7 @@ import pytest
 import pyxu.info.deps as pxd
 import pyxu.runtime as pxrt
 
-from {{cookiecutter.module_name}} import eigh
+from pyxu.math import eigh
 
 
 def allclose(x, y, xp, sign_matters=True):

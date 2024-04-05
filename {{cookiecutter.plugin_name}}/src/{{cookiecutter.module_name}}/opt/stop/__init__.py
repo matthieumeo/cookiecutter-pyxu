@@ -5,6 +5,7 @@ import pyxu.abc as pxa
 
 __all__ = ["Deadline"]
 
+
 class Deadline(pxa.StoppingCriterion):
     """
     Stop iterative solver at a specified date and time.

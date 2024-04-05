@@ -36,17 +36,8 @@ def eigh(arr: pxt.NDArray, dim_shape: pxt.NDArrayShape, normalize=True):
         The column v[..., i] is the normalized eigenvector corresponding to the eigenvalue w[..., i].
     """
     assert len(np.unique(dim_shape))
-    st_sh = arr.shape[:-1]
-    st_size = np.prod(st_sh)
-    N = pxd.NDArrayInfo
-    xp = pxu.get_array_module(arr)
 
-    if N.from_obj(arr) == N.DASK:
-        chunksize = arr.chunksize
-        arr = arr.reshape(*st_sh, *dim_shape)
-        arr = arr.rechunk(chunks=(*((-1),) * len(st_sh), *((-1),) * len(dim_shape)))
-    else:
-        arr = arr.reshape(st_size, *dim_shape)
+    xp = pxu.get_array_module(arr)
 
     w = xp.zeros_like(arr[..., 0])
     v = xp.zeros_like(arr)
@@ -56,12 +47,6 @@ def eigh(arr: pxt.NDArray, dim_shape: pxt.NDArrayShape, normalize=True):
     if normalize:
         v /= xp.linalg.norm(v, axis=-2, keepdims=True)
 
-    w = w.reshape((*st_sh, -1))
-    v = v.reshape((*st_sh, -1))
-
-    if N.from_obj(arr) == N.DASK:
-        w = w.rechunk(chunks=(*chunksize[:-1], -1))
-        v = v.rechunk(chunks=(*chunksize[:-1], -1))
     return w, v
 
 

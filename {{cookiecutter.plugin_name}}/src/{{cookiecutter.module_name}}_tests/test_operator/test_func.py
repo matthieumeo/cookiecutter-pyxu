@@ -1,4 +1,4 @@
-from {{cookiecutter.module_name}} import NullFunc
+from pyxu.operator import NullFunc
 
 
 def test_nullfunc():
