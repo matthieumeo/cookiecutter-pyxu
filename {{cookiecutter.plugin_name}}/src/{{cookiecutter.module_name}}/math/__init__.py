@@ -24,16 +24,17 @@ def eigh(arr: pxt.NDArray, dim_shape: pxt.NDArrayShape, normalize=True):
 
     Parameters
     ----------
-    arr: (…, M, M) pxt.NDArray
-    dim_shape: pxt.NDArrayShape
+    arr: NDArray
+        (..., M, M) 
+    dim_shape: NDArrayShape
     normalize: bool
 
     Returns
     -------
-    w: (…, M) pxt.NDArray
-        The eigenvalues in ascending order, each repeated according to its multiplicity.
-    v: (…, M, M) pxt.NDArray
-        The column v[..., i] is the normalized eigenvector corresponding to the eigenvalue w[..., i].
+    w: NDArray
+        (…, M) eigenvalues in ascending order, each repeated according to its multiplicity.
+    v: NDArray
+        (…, M, M), where column v[..., i] is the normalized eigenvector corresponding to the eigenvalue w[..., i].
     """
     assert len(np.unique(dim_shape))
 

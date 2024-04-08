@@ -19,9 +19,9 @@ class Flip(pxo.LinOp):
 
         Parameters
         ----------
-        dim_shape: pxt.NDArrayShape
+        dim_shape: NDArrayShape
             Shape of the data to be flipped.
-        axis: pxt.NDArrayAxis
+        axis: NDArrayAxis
             Axis or axes along which the input array is flipped.
             The default, axis=None, will flip all the in all the axis of the input array.
             If axis is negative it counts from the last to the first axis.

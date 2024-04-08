@@ -10,6 +10,6 @@ See http://sphinx-doc.org/ for more information about Sphinx.
    :maxdepth: 1
    :hidden:
 
-   guide/index
    api/index
+   examples/index
    references

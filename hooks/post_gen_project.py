@@ -29,7 +29,6 @@ def remove_temp_folders(temp_folders):
 
 def remove_unrequested_plugin_examples():
     module = "{{ cookiecutter.module_name }}"
-    contrib_list = []
     opt_list = []
     {% for key, value in cookiecutter.items() %}
     {% if key.startswith('include_') and key.endswith("_plugin") and value != 'y' %}
@@ -43,6 +42,7 @@ def remove_unrequested_plugin_examples():
     elif name in ["stop", "solver"]:
         remove_files(f"src/{module}/opt/{name}")
         remove_files(f"src/{module}_tests/test_opt/test_{name}.py")
+        remove_files(f"doc/examples/example_gd.ipynb")
         opt_list.append(name)
         if set(opt_list) == {"stop", "solver"}:
             remove_files(f"src/{module}/opt")
@@ -50,11 +50,13 @@ def remove_unrequested_plugin_examples():
     else:
         remove_files(f"src/{module}/{name}")
         remove_files(f"src/{module}_tests/test_{name}.py")
-
+    
     logger.debug(f"removing {module}/{name}.py")
     {% endif %}
     {% endfor %}
 
+    if os.path.exists(f"doc/examples/example_gd.ipynb"):
+        remove_files(f"doc/examples/placeholder.ipynb")
 
 if __name__ == "__main__":
     remove_temp_folders(ALL_TEMP_FOLDERS)

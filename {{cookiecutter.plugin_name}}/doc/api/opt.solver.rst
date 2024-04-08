@@ -5,7 +5,6 @@ pyxu.opt
    :local:
    :depth: 1
 
-
 pyxu.opt.solver
 ---------------
 
