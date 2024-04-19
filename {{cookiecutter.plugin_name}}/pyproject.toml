@@ -51,7 +51,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-urls.download = "https://github.com/{{cookiecutter.github_repository_url}}"
+urls.download = "{{cookiecutter.github_repository_url}}"
 dependencies = [
     # "pyxu >= 2.0, < 3",
     "pyxu",
