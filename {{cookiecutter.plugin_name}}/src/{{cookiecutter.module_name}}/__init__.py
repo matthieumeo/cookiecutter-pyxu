@@ -1,7 +1,7 @@
 import importlib.metadata
 
 try:
-    __version__ = importlib.metadata.version("{{cookiecutter.module_name}}}")
+    __version__ = importlib.metadata.version("{{cookiecutter.module_name}}")
 except ImportError:
     __version__ = "unknown"
 
